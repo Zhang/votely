@@ -1,0 +1,12 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "ecmaFeatures": {
+    "blockBindings": true
+  },
+  "rules": {
+    "quotes": [2, "single", "avoid-escape"]
+  }
+}
