@@ -7,9 +7,7 @@
       <td-cards>
         <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
           <div class="image" ng-controller="CardCtrl">
-            <div class="no-text">NOPE</div>
             <img ng-src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/8/005/08e/1d4/37559b1.jpg">
-            <div class="yes-text">LIKE</div>
           </div>
         </td-card>
       </td-cards>
