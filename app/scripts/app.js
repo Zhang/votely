@@ -4,7 +4,17 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('votelly', ['ionic', 'starter.controllers', 'ionic.contrib.ui.tinderCards', 'vote.navbar'])
+angular.module('votelly', [
+  'ionic',
+  'lib',
+  'vote.cards',
+  'vote.navbar',
+  'vote.router'
+])
+
+.config(function($compileProvider) {
+   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+})
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -20,27 +30,4 @@ angular.module('votelly', ['ionic', 'starter.controllers', 'ionic.contrib.ui.tin
       StatusBar.styleDefault();
     }
   });
-})
-
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-  .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })
-
-  .state('app.cards', {
-    url: '/cards',
-    views: {
-      menuContent: {
-        templateUrl: 'templates/cards.html',
-        controller: 'CardsController'
-      }
-    }
-  })
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/cards');
 });

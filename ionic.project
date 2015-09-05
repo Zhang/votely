@@ -1,4 +1,8 @@
 {
   "name": "Votely",
-  "app_id": "86c59ec5"
+  "app_id": "86c59ec5",
+  "watchPatterns": [
+    "www/scripts/**/*",
+    "!www/css/**/*"
+  ]
 }

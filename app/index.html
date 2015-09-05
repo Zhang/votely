@@ -3,7 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <!-- HOLY SHIT THIS ISN'T SECURE -->
+    <meta http-equiv="Content-Security-Policy" content="default-src *;">
     <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
@@ -12,6 +16,8 @@
     <!-- endbower -->
     <!-- endbuild -->
     <link href="styles/style.css" rel="stylesheet">
+    <link href="styles/cards.css" rel="stylesheet">
+    <link href="styles/main.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="styles/ionic.app.css" rel="stylesheet">
@@ -38,7 +44,11 @@
     <!-- your app's js -->
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers.js"></script>
+    <script src="scripts/router.js"></script>
+    <script src="scripts/lib/lib.js"></script>
+    <script src="scripts/lib/camera.js"></script>
+    <script src="scripts/frame/navbar/navbar.js"></script>
+    <script src="scripts/frame/cards/cards.js"></script>
     <script src="scripts/configuration.js"></script>
     <!-- endbuild -->
   </head>
