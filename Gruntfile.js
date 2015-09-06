@@ -43,6 +43,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
+            //10.0.2.2 is an ip reserved by android emulator to connect to local servers
             apiEndpoint: 'http://10.0.2.2:3000/'
           }
         }
