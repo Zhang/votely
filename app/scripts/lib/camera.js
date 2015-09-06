@@ -6,14 +6,10 @@
     return {
       getPicture: function getPicture() {
         var config = {
-            quality : 75,
+            quality : 100,
             destinationType : Camera.DestinationType.FILE_URI,
             sourceType : Camera.PictureSourceType.CAMERA,
-            allowEdit : true,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 300,
-            targetHeight: 300,
-            popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: false
         };
 
