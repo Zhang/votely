@@ -9,10 +9,11 @@
         $scope.getPicture = function() {
           var options = {
               fileKey: "avatar",
-              fileName: "image.png",
+              fileName: "image.jpeg",
               chunkedMode: false,
               mimeType: "image/jpeg"
           };
+
           Camera.getPicture().then(function success(data) {
             $cordovaFileTransfer.upload("http://10.0.2.2:3000/photo", data, options).then(function(result) {
               console.log("SUCCESS: " + JSON.stringify(result.response));
