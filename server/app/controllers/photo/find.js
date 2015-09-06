@@ -10,7 +10,8 @@ const photos = {
 /**
  * Find a photo by ID.
  */
-const find = function* find(id) {
+const find = function* find(next) {
+  const id = this.params.id;
   if (!photos.hasOwnProperty(id)) {
     this.status = 404;
     return;

@@ -1,17 +1,24 @@
 'use strict';
 
 (function() {
-  var app = angular.module('lib.camera', []);
-  app.factory('Camera', [function($cordovaCamera) {
-
+  var app = angular.module('lib.camera', ['ngCordova']);
+  app.factory('Camera', function($cordovaCamera) {
     return {
-      getPicture: function() {
-        var options = {
-          saveToPhotoAlbum: false
+      getPicture: function getPicture() {
+        var config = {
+            quality : 75,
+            destinationType : Camera.DestinationType.FILE_URI,
+            sourceType : Camera.PictureSourceType.CAMERA,
+            allowEdit : true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
         };
 
-        return $cordovaCamera.getPicture(options);
+        return $cordovaCamera.getPicture(config);
       }
     }
-  }]);
+  });
 })();
