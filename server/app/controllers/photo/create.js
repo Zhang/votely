@@ -43,7 +43,6 @@ const uploadPhoto = function uploadPhoto(mimeType, contents) {
  * upload a photo. Handles multipart uploads only.
  */
 const create = function* create(next) {
-  console.log('here', this.request);
   if (!this.request.is('multipart/*')) {
     return yield next;
   }
