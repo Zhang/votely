@@ -8,7 +8,6 @@
       controller: function($scope, Camera, Photo) {
         $scope.getPicture = function() {
           Camera.getPicture().then(function success(data) {
-            $scope.data = JSON.stringify(data);
             Photo.save(data);
           });
         }

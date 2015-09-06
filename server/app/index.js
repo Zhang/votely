@@ -7,7 +7,7 @@
 const bodyParser = require('koa-bodyparser');
 const koa = require('koa');
 const photoController = require('./controllers/photo');
-const route = require('koa-route');
+const mount = require('koa-mount');
 
 /**
  * App instance.
@@ -25,9 +25,7 @@ app.use(bodyParser());
  * Routes.
  */
 
-
-app.use(route.post('/photo', photoController.create));
-app.use(route.get('/photo/:id', photoController.find));
+app.use(mount('/photo', require('./controllers/photo')));
 
 /**
  * Exports.

@@ -16,7 +16,7 @@
       return fd;
     }
 
-    return $resource(ENV.apiEnpoint + 'photo/:id', {id: '@id'}, {
+    return $resource(ENV.apiEndpoint + 'photo/:id', {id: '@id'}, {
       save: {
         method: 'POST',
         transformRequest: formDataObject,
