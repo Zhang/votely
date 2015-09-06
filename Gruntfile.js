@@ -61,7 +61,7 @@ module.exports = function (grunt) {
     watch: {
       bower: {
         files: ['bower.json'],
-        tasks: ['wiredep', 'newer:copy:app']
+        tasks: ['newer:copy:app']
       },
       html: {
         files: ['<%= yeoman.app %>/**/*.html'],
@@ -148,16 +148,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-
-    // Automatically inject Bower components into the app
-    wiredep: {
-      app: {
-        src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
-      }
-    },
-
-
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
@@ -409,7 +399,7 @@ module.exports = function (grunt) {
   // over to <%= yeoman.dist %>/. Last step is running cordova prepare so we can refresh the ripple
   // browser tab to see the changes. Technically ripple runs `cordova prepare` on browser
   // refreshes, but at this time you would need to re-run the emulator to see changes.
-  grunt.registerTask('ripple', ['wiredep', 'newer:copy:app', 'ripple-emulator']);
+  grunt.registerTask('ripple', ['newer:copy:app', 'ripple-emulator']);
   grunt.registerTask('ripple-emulator', function () {
     grunt.config.set('watch', {
       all: {
@@ -458,7 +448,6 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
-    'wiredep',
     'clean',
     'concurrent:test',
     'autoprefixer',
@@ -472,7 +461,7 @@ module.exports = function (grunt) {
     }
 
     grunt.config('concurrent.ionic.tasks', ['ionic:serve', 'watch']);
-    grunt.task.run(['wiredep', 'init', 'concurrent:ionic']);
+    grunt.task.run(['init', 'concurrent:ionic']);
   });
   grunt.registerTask('emulate', function() {
     grunt.config('concurrent.ionic.tasks', ['ionic:emulate:' + this.args.join(), 'watch']);
@@ -489,7 +478,6 @@ module.exports = function (grunt) {
   grunt.registerTask('init', [
     'clean',
     'ngconstant:development',
-    'wiredep',
     'concurrent:server',
     'autoprefixer',
     'newer:copy:app',
@@ -500,7 +488,6 @@ module.exports = function (grunt) {
   grunt.registerTask('compress', [
     'clean',
     'ngconstant:production',
-    'wiredep',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -519,7 +506,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'wiredep',
     'newer:jshint',
     'karma:continuous',
     'compress'
