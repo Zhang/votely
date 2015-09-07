@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-  var app = angular.module('vote.cards', ['ionic.contrib.ui.tinderCards']);
+  var app = angular.module('vote.cards', ['ionic.contrib.ui.tinderCards', 'vote.managers.photos']);
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -13,35 +13,31 @@
           templateUrl: 'scripts/frame/cards/cards.html',
           controller: 'CardsController'
         }
+      },
+      resolve: {
+        photosManager: function(PhotosManager) {
+          var photosManager = new PhotosManager();
+          return photosManager.query().then(function() {
+            return photosManager;
+          });
+        }
       }
     })
   });
 
-  app.controller('CardsController', function($scope, $stateParams) {
-    $scope.cards = [
-      { card: 1 },
-      { card: 2 }
-    ];
+  app.controller('CardsController', function($scope, $stateParams, photosManager) {
+    $scope.cards = photosManager.photos;
 
-    $scope.cardDestroyed = function(index) {
-      $scope.cards.splice(index, 1);
+    function addCard() {}
+
+    $scope.cardSwipedLeft = function(card) {
+      photosManager.upvote(card._id)
+      addCard();
     };
 
-    $scope.addCard = function() {
-      var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-      newCard.id = Math.random();
-      $scope.cards.push(angular.extend({}, newCard));
-    }
-  })
-
-  .controller('CardCtrl', function($scope, TDCardDelegate) {
-    $scope.cardSwipedLeft = function(index) {
-      console.log('LEFT SWIPE');
-      $scope.addCard();
-    };
-    $scope.cardSwipedRight = function(index) {
-      console.log('RIGHT SWIPE');
-      $scope.addCard();
+    $scope.cardSwipedRight = function(card) {
+      photosManager.downvote(card._id)
+      addCard();
     };
   });
 })();

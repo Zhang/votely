@@ -1,11 +1,11 @@
 'use strict';
 
 (function() {
-  var app = angular.module('vote.navbar', ['vote.api', 'ngCordova']);
+  var app = angular.module('vote.navbar', ['ngCordova']);
   app.directive('navbar', function() {
     return {
       templateUrl: 'scripts/frame/navbar/navbar.html',
-      controller: function($scope, Camera, Photo, $cordovaFileTransfer) {
+      controller: function($scope, Camera, $cordovaFileTransfer) {
         $scope.getPicture = function() {
           var options = {
               fileKey: "avatar",
@@ -15,7 +15,8 @@
           };
 
           Camera.getPicture().then(function success(data) {
-            $cordovaFileTransfer.upload("http://10.0.2.2:3000/photo", data, options).then(function(result) {
+            //change this
+            $cordovaFileTransfer.upload("http://10.0.2.2:3000/photos", data, options).then(function(result) {
               console.log("SUCCESS: " + JSON.stringify(result.response));
             }, function(err) {
               console.log("ERROR: " + JSON.stringify(err));

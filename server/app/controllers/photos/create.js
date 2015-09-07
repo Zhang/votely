@@ -7,7 +7,7 @@
 const parse = require('co-busboy');
 const uploadPhoto = require('../../lib/aws').upload;
 const extension = require('mime-types').extension;
-const photoModel = require('../../models/photo');
+const photoModel = require('../../models/photos');
 const uuid = require('uuid');
 
 /**
