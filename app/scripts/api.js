@@ -7,27 +7,22 @@
     $resourceProvider.defaults.stripTrailingSlashes = true;
   }]);
 
-  app.factory('Photo', function($resource, ENV, $http) {
+  app.factory('Photos', function($resource, ENV, $http) {
     return {
       upvote: function(id) {
-        return $http.post(ENV.apiEndpoint + 'photo/' + id, {
+        return $http.post(ENV.apiEndpoint + 'photos/' + id, {
           upvote: true
         });
       },
       upvote: function(id) {
-        return $http.post(ENV.apiEndpoint + 'photo/' + id, {
+        return $http.post(ENV.apiEndpoint + 'photos/' + id, {
           downvote: true
         });
-      };
-    }
-  });
-
-  app.factory('Photos', function($resource, ENV, $http) {
-    return {
+      },
       query: function(params) {
         return $http.get(ENV.apiEndpoint + 'photos');
       }
-    };
-  })
+    }
+  });
 })();
 
