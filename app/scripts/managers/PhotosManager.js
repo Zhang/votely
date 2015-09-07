@@ -24,12 +24,6 @@
           self.photos = res.data;
         });
       }
-
-      this.upvote = function upvote(id) {
-        return $http.post(PHOTOS_ENDPOINT + id, {
-          upvote: true
-        });
-      }
     }
 
     function PhotosManager() {
