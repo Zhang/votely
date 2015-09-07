@@ -5,8 +5,9 @@
       </ion-header-bar>
 
       <td-cards>
-        <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
-          <div class="image" ng-controller="CardCtrl">
+        <!-- additional methods: on-destroy and on-partial-swipe -->
+        <td-card ng-repeat="card in cards" on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)" class="card-{{$index}}">
+          <div class="image">
             <img ng-src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/8/005/08e/1d4/37559b1.jpg">
           </div>
         </td-card>

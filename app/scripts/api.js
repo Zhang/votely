@@ -8,26 +8,26 @@
   }]);
 
   app.factory('Photo', function($resource, ENV, $http) {
-    function formDataObject (data) {
-      var fd = new FormData();
-      angular.forEach(data, function(value, key) {
-          fd.append(key, value);
-      });
-      return fd;
-    }
     return {
-      save: function(data) {
-        var formatedData = formDataObject(data);
-        return $http.post(ENV.apiEndpoint + 'photo', formatedData);
-      }
+      upvote: function(id) {
+        return $http.post(ENV.apiEndpoint + 'photo/' + id, {
+          upvote: true
+        });
+      },
+      upvote: function(id) {
+        return $http.post(ENV.apiEndpoint + 'photo/' + id, {
+          downvote: true
+        });
+      };
     }
-    // return $resource(ENV.apiEndpoint + 'photo/:id', {id: '@id'}, {
-    //   save: {
-    //     method: 'POST',
-    //     transformRequest: formDataObject,
-    //     headers: {'Content-Type': undefined, enctype:'multipart/form-data'}
-    //   }
-    // });
+  });
+
+  app.factory('Photos', function($resource, ENV, $http) {
+    return {
+      query: function(params) {
+        return $http.get(ENV.apiEndpoint + 'photos');
+      }
+    };
   })
 })();
 

@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-  var app = angular.module('vote.cards', ['ionic.contrib.ui.tinderCards']);
+  var app = angular.module('vote.cards', ['ionic.contrib.ui.tinderCards', 'vote.api']);
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -13,11 +13,16 @@
           templateUrl: 'scripts/frame/cards/cards.html',
           controller: 'CardsController'
         }
+      },
+      resolve: {
+        Photos: function(Photos) {
+          return Photos.query();
+        }
       }
     })
   });
 
-  app.controller('CardsController', function($scope, $stateParams) {
+  app.controller('CardsController', function($scope, $stateParams, Photo, Photos) {
     $scope.cards = [
       { card: 1 },
       { card: 2 }
@@ -28,15 +33,15 @@
     };
 
     $scope.addCard = function() {
-      var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-      newCard.id = Math.random();
-      $scope.cards.push(angular.extend({}, newCard));
+      var newCard = {
+        card: Math.random()
+      };
+      $scope.cards.push(newCard);
     }
-  })
 
-  .controller('CardCtrl', function($scope, TDCardDelegate) {
     $scope.cardSwipedLeft = function(index) {
       console.log('LEFT SWIPE');
+      Photo.upvote().then
       $scope.addCard();
     };
     $scope.cardSwipedRight = function(index) {
