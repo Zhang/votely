@@ -3,7 +3,6 @@
 angular.module('votelly', [
   'ionic',
   'lib',
-  'vote.api',
   'vote.cards',
   'vote.navbar',
   'vote.router'

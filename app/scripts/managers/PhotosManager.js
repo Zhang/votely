@@ -2,11 +2,6 @@
 
 (function() {
   var app = angular.module('vote.managers.photos', ['config', 'ngResource']);
-  app.config(['$resourceProvider', function($resourceProvider) {
-    // Strips trailing slashes from urls
-    $resourceProvider.defaults.stripTrailingSlashes = true;
-  }]);
-
   app.factory('PhotosManager', function($resource, ENV, $http) {
     var PHOTOS_ENDPOINT = ENV.apiEndpoint + 'photos/';
 
