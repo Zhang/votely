@@ -12,7 +12,12 @@ const AccountSchema = Joi.object().keys({
 
 const modelCRUD = require('./concerns/modelCRUD')('photos', collection, AccountSchema);
 
+function getByEmail(email) {
+  collection.find({email: email});
+}
+
 module.exports = {
   add: modelCRUD.create,
-  get: modelCRUD.get
+  get: modelCRUD.get,
+  getByEmail: getByEmail
 };
