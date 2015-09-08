@@ -6,11 +6,11 @@ const Joi = require('joi');
 
 const AccountSchema = Joi.object().keys({
   _id: Joi.string(),
-  email: Joi.number().required(),
-  password: Joi.number().required()
+  email: Joi.string().required(),
+  password: Joi.string().required()
 });
 
-const modelCRUD = require('./concerns/modelCRUD')('photos', collection, AccountSchema);
+const modelCRUD = require('./concerns/modelCRUD')('account', collection, AccountSchema);
 
 function getByEmail(email) {
   collection.find({email: email});
