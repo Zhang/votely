@@ -30,6 +30,7 @@ app.use(cors());
  * Routes.
  */
 app.use(mount('/photos', require('./controllers/photos')));
+app.use(mount('/accounts', require('./controllers/accounts')));
 
 /**
  * Exports.
