@@ -22,7 +22,7 @@ const create = function* create(next) {
   // it
   const parts = yield parse(this);
   const ext = extension(parts.mimeType);
-  const key = `${uuid.v4()}.${ext}`
+  const key = `${uuid.v4()}.${ext}`;
 
   const upload = yield uploadPhoto(parts, key);
   yield photoModel.add({

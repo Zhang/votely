@@ -30,7 +30,7 @@ const upload = function upload(contents, key) {
       resolve(data);
     });
   });
-}
+};
 
 module.exports = {
   upload: upload

@@ -7,7 +7,7 @@
 const bodyParser = require('koa-bodyparser');
 const koa = require('koa');
 const mount = require('koa-mount');
-const logger = require('koa-logger')
+const logger = require('koa-logger');
 const cors = require('kcors');
 
 /**
