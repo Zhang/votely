@@ -20,7 +20,8 @@ const add = function add(photo) {
     upvote: 0,
     downvote: 0
   });
-  modelCRUD.create(photo);
+
+  return modelCRUD.create(photo);
 };
 
 const vote = function* vote(id, voteResult) {
