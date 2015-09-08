@@ -40,7 +40,7 @@ module.exports = (function() {
     _.partial(validateMongoVersion, db.driver),
   ]), function(err) {
     if (err) {
-      console.log('Failed to load db')
+      console.log('Failed to load db');
       console.log(err);
     }
   });

@@ -13,25 +13,19 @@ const PhotoSchema = Joi.object().keys({
   location: Joi.string().required()
 });
 
+const modelCRUD = require('./concerns/modelCRUD')('photos', collection, PhotoSchema);
+
 const add = function add(photo) {
   photo = _.defaults(photo, {
     upvote: 0,
     downvote: 0
   });
 
-  var validity = Joi.validate(photo, PhotoSchema);
-
-  if (validity.error) {
-    console.log('Invalid photo object: ', JSON.stringify(photo));
-    console.log('Error: ', validity.error);
-    return validity.error;
-  }
-
-  return collection.insert(photo);
-}
+  return modelCRUD.create(photo);
+};
 
 const vote = function* vote(id, voteResult) {
-  const photo = yield collection.findById(id);
+  const photo = yield modelCRUD.get(id);
   let increment;
 
   if (voteResult.upvote) {
@@ -41,14 +35,11 @@ const vote = function* vote(id, voteResult) {
   }
 
   return collection.update(id, {$set: increment});
-}
-
-const query = function query() {
-  return collection.find({});
-}
+};
 
 module.exports = {
   add: add,
-  query: query,
-  vote: vote
+  query: modelCRUD.query,
+  vote: vote,
+  get: modelCRUD.get
 };
