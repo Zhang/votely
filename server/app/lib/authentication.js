@@ -6,16 +6,20 @@ const accountModel = require('../models/account');
 const LocalStrategy = require('passport-local').Strategy;
 
 passport.serializeUser(function(user, done) {
+  console.log(user);
   done(null, user._id);
 });
 
 passport.deserializeUser(function* (id, done) {
+  console.log(id);
   const user = yield accountModel.get(id);
+  console.log(user);
   done(null, user);
 });
 
 passport.use(new LocalStrategy(function* (email, password, done) {
   const user = yield accountModel.getByEmail(email);
+  console.log(user);
   if (user && user.password === password) return done(null, user);
   done(null, false);
 }));
