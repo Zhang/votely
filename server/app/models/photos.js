@@ -13,6 +13,10 @@ const PhotoSchema = Joi.object().keys({
   location: Joi.string().required()
 });
 
+const get = function get(id) {
+  return collection.findById(id);
+}
+
 const add = function add(photo) {
   photo = _.defaults(photo, {
     upvote: 0,
@@ -31,7 +35,7 @@ const add = function add(photo) {
 }
 
 const vote = function* vote(id, voteResult) {
-  const photo = yield collection.findById(id);
+  const photo = yield get(id);
   let increment;
 
   if (voteResult.upvote) {
@@ -50,5 +54,6 @@ const query = function query() {
 module.exports = {
   add: add,
   query: query,
-  vote: vote
+  vote: vote,
+  get: get
 };

@@ -6,6 +6,7 @@ const _ = require('lodash');
 
 const update = function* update(next) {
   var body = this.request.body;
+  console.log(body);
   assert(body && (body.upvote || body.downvote));
 
   this.body = yield photoModel.vote(this.params.id, body);

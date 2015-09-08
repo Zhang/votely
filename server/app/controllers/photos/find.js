@@ -1,12 +1,5 @@
 'use strict';
 
-// FIXME: Replace this with a real photo store
-const photos = {
-  '123': {
-    url: 'http://img1.wikia.nocookie.net/__cb20130318151721/epicrapbattlesofhistory/images/6/6d/Rick-astley.jpg'
-  }
-};
-
 /**
  * Find a photo by ID.
  */
@@ -17,7 +10,7 @@ const find = function* find(next) {
     return;
   }
 
-  this.body = photos[id];
+  this.body = yield photoModel.get(id);
   this.status = 200;
 };
 

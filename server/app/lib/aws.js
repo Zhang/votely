@@ -21,17 +21,13 @@ const upload = function upload(contents, key) {
   const params = {
     Body: contents,
     Bucket: process.env.AWS_BUCKET,
-    // Give the file a random name in S3
     Key: key
   };
 
   return new Promise(function(resolve, reject) {
     s3.upload(params, function(err, data) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(data);
-      }
+      if (err) return reject(err);
+      resolve(data);
     });
   });
 }
