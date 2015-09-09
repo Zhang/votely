@@ -12,6 +12,9 @@
           username: email,
           password: password
         }).then(function(res) {
+          //var token = res.payload.token;
+          //$http.defaults.headers.common['X-Access-Token'] = token;
+          //$cordovaLocalStorage.setItem('sessionToken', token);
           self.currentUser = res.data;
         });
       };

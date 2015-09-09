@@ -26,7 +26,9 @@ const app = koa();
 app.use(bodyParser({
   formLimit: '10mb'
 }));
-app.use(cors());
+app.use(cors({
+  credentials: true
+}));
 app.use(logger());
 
 errors.initialize(app);

@@ -60,16 +60,15 @@ module.exports = {
   },
   passport: passport,
   isAuthenticated: function* (next) {
-    console.log(this.session);
     if (this.isAuthenticated()) {
       yield next;
     } else {
-      this.status = 401;
+      throw new errors.AuthenticationError();
     }
   },
-  login: function* (next) {
+  login: function () {
     const self = this;
-    yield passport.authenticate('local', function* (err, user, info) {
+    return passport.authenticate('local', function* (err, user, info) {
       if (err) throw err;
       if (user === false) {
         throw new errors.AuthenticationError(info);
@@ -78,7 +77,7 @@ module.exports = {
         self.body = user;
         yield self.login(user);
       }
-    }).call(this, next);
+    });
   }
 };
 

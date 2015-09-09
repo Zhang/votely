@@ -11,7 +11,8 @@
     'landingPage'
   ])
 
-  .config(function($compileProvider) {
+  .config(function($compileProvider,  $httpProvider) {
+     $httpProvider.defaults.withCredentials = true;
      $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
   })
 
