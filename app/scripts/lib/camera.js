@@ -1,20 +1,23 @@
+/* globals Camera */
 'use strict';
 
 (function() {
-  var app = angular.module('lib.camera', ['ngCordova']);
+  var app = angular.module('lib.camera', ['ngCordova', 'config']);
   app.factory('Camera', function($cordovaCamera) {
-    return {
-      getPicture: function getPicture() {
-        var config = {
-            quality : 100,
-            destinationType : Camera.DestinationType.FILE_URI,
-            sourceType : Camera.PictureSourceType.CAMERA,
-            encodingType: Camera.EncodingType.JPEG,
-            saveToPhotoAlbum: false
-        };
+    function getPicture() {
+      var config = {
+          quality : 100,
+          destinationType : Camera.DestinationType.FILE_URI,
+          sourceType : Camera.PictureSourceType.CAMERA,
+          encodingType: Camera.EncodingType.JPEG,
+          saveToPhotoAlbum: false
+      };
 
-        return $cordovaCamera.getPicture(config);
-      }
+      return $cordovaCamera.getPicture(config);
     }
+
+    return {
+      getPicture: getPicture
+    };
   });
 })();

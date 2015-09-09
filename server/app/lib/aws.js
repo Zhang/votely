@@ -3,8 +3,8 @@
 const AWS = require('aws-sdk');
 
 const AWS_CONFIG = {
-  accessKeyId: 'AKIAIFOZRFNCM7Y5ZDZA',
-  secretAccessKey: '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',
+  accessKeyId: 'AKIAICWM7L6PETCCP5RA',
+  secretAccessKey: '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',
 };
 
 AWS.config.update(AWS_CONFIG);

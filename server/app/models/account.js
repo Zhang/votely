@@ -3,16 +3,28 @@
 const db = require('../db');
 const collection = db.get('account');
 const Joi = require('joi');
+const errors = require('../lib/errors');
 
 const AccountSchema = Joi.object().keys({
   _id: Joi.string(),
-  email: Joi.number().required(),
-  password: Joi.number().required()
+  email: Joi.string().required(),
+  password: Joi.string().required()
 });
 
-const modelCRUD = require('./concerns/modelCRUD')('photos', collection, AccountSchema);
+const modelCRUD = require('./concerns/modelCRUD')('account', collection, AccountSchema);
+
+function getByEmail(email) {
+  return collection.findOne({email: email});
+}
+
+function* add(account) {
+  const existingAccount = yield getByEmail(account.email);
+  if (existingAccount) throw new errors.DuplicateError('account', account.email);
+  yield modelCRUD.create(account);
+}
 
 module.exports = {
-  add: modelCRUD.create,
-  get: modelCRUD.get
+  add: add,
+  get: modelCRUD.get,
+  getByEmail: getByEmail
 };

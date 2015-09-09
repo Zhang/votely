@@ -3,7 +3,7 @@
 const photoModel = require('../../models/photos');
 const assert = require('assert');
 
-const update = function* update(next) {
+const update = function* update() {
   const body = this.request.body;
   assert(body && (body.upvote || body.downvote));
 

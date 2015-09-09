@@ -1,0 +1,8 @@
+div.list.landing {
+  position: relative;
+}
+
+button.button-full {
+  position: absolute;
+  bottom: 0;
+}

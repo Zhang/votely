@@ -3,7 +3,7 @@
 (function() {
   var app = angular.module('vote.cards', ['ionic.contrib.ui.tinderCards', 'vote.managers.photos']);
 
-  app.config(function($stateProvider, $urlRouterProvider) {
+  app.config(function($stateProvider) {
     $stateProvider
 
     .state('app.cards', {
@@ -22,7 +22,7 @@
           });
         }
       }
-    })
+    });
   });
 
   app.controller('CardsController', function($scope, $stateParams, photosManager) {
@@ -31,13 +31,15 @@
     function addCard() {}
 
     $scope.cardSwipedLeft = function(card) {
-      photosManager.upvote(card._id)
-      addCard();
+      photosManager.upvote(card._id).then(function() {
+        addCard();
+      });
     };
 
     $scope.cardSwipedRight = function(card) {
-      photosManager.downvote(card._id)
-      addCard();
+      photosManager.downvote(card._id).then(function() {
+        addCard();
+      });
     };
   });
 })();
