@@ -1,3 +1,4 @@
+/* globals Camera */
 'use strict';
 
 (function() {
@@ -7,9 +8,9 @@
       getPicture: function getPicture() {
         var config = {
             quality : 100,
-            destinationType : $cordovaCamera.DestinationType.FILE_URI,
-            sourceType : $cordovaCamera.PictureSourceType.CAMERA,
-            encodingType: $cordovaCamera.EncodingType.JPEG,
+            destinationType : Camera.DestinationType.FILE_URI,
+            sourceType : Camera.PictureSourceType.CAMERA,
+            encodingType: Camera.EncodingType.JPEG,
             saveToPhotoAlbum: false
         };
 
