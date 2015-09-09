@@ -25,7 +25,7 @@ const create = function* create(next) {
   const key = `${uuid.v4()}.${ext}`;
   const upload = yield uploadPhoto(parts, key);
 
-  const photo = yield photoModel.add({
+  yield photoModel.add({
     location: upload.Location,
     key: key
   });

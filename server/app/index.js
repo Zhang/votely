@@ -11,6 +11,8 @@ const logger = require('koa-logger');
 const cors = require('kcors');
 const authentication = require('./lib/authentication');
 const _ = require('lodash');
+const errors = require('./lib/errors');
+
 /**
  * App instance.
  */
@@ -24,8 +26,10 @@ const app = koa();
 app.use(bodyParser({
   formLimit: '10mb'
 }));
-app.use(logger());
 app.use(cors());
+app.use(logger());
+
+errors.initialize(app);
 
 authentication.initialize(app);
 app.use(function* authenticatePrivateRoutes(next) {

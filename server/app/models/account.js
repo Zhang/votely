@@ -3,6 +3,7 @@
 const db = require('../db');
 const collection = db.get('account');
 const Joi = require('joi');
+const errors = require('../lib/errors');
 
 const AccountSchema = Joi.object().keys({
   _id: Joi.string(),
@@ -18,7 +19,7 @@ function getByEmail(email) {
 
 function* add(account) {
   const existingAccount = yield getByEmail(account.email);
-  if (existingAccount) throw new Error('an account with this email already exists!');
+  if (existingAccount) throw new errors.DuplicateError('account', account.email);
   yield modelCRUD.create(account);
 }
 

@@ -7,6 +7,7 @@ const passport = require('koa-passport');
 const accountModel = require('../models/account');
 const LocalStrategy = require('passport-local').Strategy;
 const co = require('co');
+const errors = require('./errors');
 
 passport.serializeUser(function(user, done) {
   console.log('serializeUser');
@@ -71,8 +72,7 @@ module.exports = {
     yield passport.authenticate('local', function* (err, user, info) {
       if (err) throw err;
       if (user === false) {
-        self.status = 401;
-        self.body = info;
+        throw new errors.AuthenticationError(info);
       } else {
         self.status = 201;
         self.body = user;

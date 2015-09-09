@@ -4,7 +4,7 @@ const photoModel = require('../../models/photos');
 /**
  * Find a photo by ID.
  */
-const find = function* find(next) {
+const find = function* find() {
   const id = this.params.id;
   const photo = yield photoModel.get(id);
   if (!photo) {
