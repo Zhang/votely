@@ -12,11 +12,16 @@
     });
   });
 
-  app.controller('LandingController', function($scope, $state, AccountManager) {
+  app.controller('LandingController', function($scope, $state, AccountManager, $ionicPopup) {
     var accountManager = new AccountManager();
     $scope.signup = function(email, password) {
-      accountManager.signup(email, password).then(function() {
+      accountManager.signup(email, password).then(function resolve() {
         $state.go('app.cards');
+      }, function reject() {
+        $ionicPopup.alert({
+          title: 'Invalid Email',
+          template: 'Seems like someone is already using that email address, and you wont be able to claim it'
+        });
       });
     };
   });

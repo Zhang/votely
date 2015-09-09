@@ -31,13 +31,15 @@
     function addCard() {}
 
     $scope.cardSwipedLeft = function(card) {
-      photosManager.upvote(card._id);
-      addCard();
+      photosManager.upvote(card._id).then(function() {
+        addCard();
+      });
     };
 
     $scope.cardSwipedRight = function(card) {
-      photosManager.downvote(card._id);
-      addCard();
+      photosManager.downvote(card._id).then(function() {
+        addCard();
+      });
     };
   });
 })();

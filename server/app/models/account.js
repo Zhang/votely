@@ -16,8 +16,14 @@ function getByEmail(email) {
   return collection.findOne({email: email});
 }
 
+function* add(account) {
+  const existingAccount = yield getByEmail(account.email);
+  if (existingAccount) throw new Error('an account with this email already exists!');
+  yield modelCRUD.create(account);
+}
+
 module.exports = {
-  add: modelCRUD.create,
+  add: add,
   get: modelCRUD.get,
   getByEmail: getByEmail
 };

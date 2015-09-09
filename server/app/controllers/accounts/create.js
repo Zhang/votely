@@ -14,13 +14,17 @@ const create = function* create(next) {
   const body = this.request.body;
   const email = body.username;
   const password = body.password;
+  try {
+    yield accountModel.add({
+      password: password,
+      email: email
+    });
 
-  yield accountModel.add({
-    password: password,
-    email: email
-  });
-
-  yield authentication.login.call(this, next);
+    yield authentication.login.call(this, next);
+  } catch (err) {
+    this.status = 400;
+    this.body = err.message;
+  }
 };
 
 /**
