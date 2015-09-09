@@ -5,8 +5,8 @@
   app.factory('AccountManager', function(ENV, $http) {
     var ACCOUNT_ENDPOINT = ENV.apiEndpoint + 'accounts/';
 
-    function Helpers() {
-      this.signup = function upvote(email, password) {
+    var AccountManager = {
+      signup: function upvote(email, password) {
         var self = this;
         return $http.post(ACCOUNT_ENDPOINT, {
           username: email,
@@ -14,14 +14,21 @@
         }).then(function(res) {
           self.currentUser = res.data;
         });
-      };
-    }
+      },
+      getFriends: function() {
+        var self = this;
+        return $http.post(ACCOUNT_ENDPOINT + 'query/', {
+          ids: self.currentUser.connections
+        }).then(function(res) {
+          return res.data;
+        });
+      },
+      connect: function(connectWith) {
+        return $http.post(ACCOUNT_ENDPOINT + 'connect/' + connectWith);
+      },
+      currentUser: {}
+    };
 
-    function AccountManager() {
-      this.currentUser = {};
-    }
-
-    AccountManager.prototype = new Helpers();
     return AccountManager;
   });
 })();

@@ -6,12 +6,12 @@ const Joi = require('joi');
 const errors = require('../lib/errors');
 const _ = require('lodash');
 
-const PhotoSchema = Joi.string().description('strings corresponding to the _id of other users');
+const PhotoSchema = Joi.string().description('strings corresponding to the _id of photos');
 const AccountSchema = Joi.object().keys({
   _id: Joi.string(),
   email: Joi.string().required(),
   password: Joi.string().required(),
-  connections: Joi.array().items(Joi.string().description(PhotoSchema)).required(),
+  connections: Joi.array().items(Joi.string().description('strings corresponding to the _id of other users')).required(),
   selfPhotos: Joi.array().items(PhotoSchema).required(),
   receivedPhotos: Joi.array().items(PhotoSchema).required()
 });
@@ -42,6 +42,7 @@ function* connect(requester, connection) {
 module.exports = {
   add: add,
   get: modelCRUD.get,
+  query: modelCRUD.query,
   getByEmail: getByEmail,
   connect: connect
 };

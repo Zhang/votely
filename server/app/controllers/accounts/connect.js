@@ -7,8 +7,9 @@ const _ = require('lodash');
  */
 const connect = function* find() {
   const requester = _.get(this, 'passport.user._id');
-  const connection = this.params.id;
-  yield accountModel.connect(requester, connection);
+  const connectionEmail = this.params.email;
+  const connection = yield accountModel.getByEmail(connectionEmail);
+  yield accountModel.connect(requester, connection._id);
 
   this.status = 200;
 };
