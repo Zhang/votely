@@ -12,7 +12,6 @@
           username: email,
           password: password
         }).then(function(res) {
-          console.log(arguments);
           self.currentUser = res.data;
         });
       };

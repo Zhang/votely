@@ -7,9 +7,9 @@
       getPicture: function getPicture() {
         var config = {
             quality : 100,
-            destinationType : Camera.DestinationType.FILE_URI,
-            sourceType : Camera.PictureSourceType.CAMERA,
-            encodingType: Camera.EncodingType.JPEG,
+            destinationType : $cordovaCamera.DestinationType.FILE_URI,
+            sourceType : $cordovaCamera.PictureSourceType.CAMERA,
+            encodingType: $cordovaCamera.EncodingType.JPEG,
             saveToPhotoAlbum: false
         };
 

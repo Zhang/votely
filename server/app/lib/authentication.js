@@ -7,19 +7,17 @@ const LocalStrategy = require('passport-local').Strategy;
 const co = require('co');
 
 passport.serializeUser(function(user, done) {
-  console.log(user);
   done(null, user._id);
 });
 
-passport.deserializeUser(function* (id, done) {
-  console.log(id);
-  const user = yield accountModel.get(id);
-  console.log(user);
-  done(null, user);
+passport.deserializeUser(function (id, done) {
+  co(function* () {
+    const user = yield accountModel.get(id);
+    done(null, user);
+  });
 });
 
 passport.use(new LocalStrategy(function (email, password, done) {
-  //const user = yield accountModel.getByEmail(email);
   co(function* () {
     const account = yield accountModel.getByEmail(email);
     if (account && account.password === password) return done(null, account);
@@ -55,9 +53,22 @@ module.exports = {
     if (this.isAuthenticated()) {
       yield next;
     } else {
-      console.log('wtf');
       this.status = 401;
     }
+  },
+  login: function* (next) {
+    const self = this;
+    yield passport.authenticate('local', function* (err, user, info) {
+      if (err) throw err;
+      if (user === false) {
+        self.status = 401;
+        self.body = info;
+      } else {
+        self.status = 201;
+        self.body = user;
+        yield self.login(user);
+      }
+    }).call(this, next);
   }
 };
 
