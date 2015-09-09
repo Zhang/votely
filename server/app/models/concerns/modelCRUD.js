@@ -19,6 +19,9 @@ module.exports = function(collectionName, collection, schema) {
     get: function(id) {
       return collection.findById(id);
     },
+    updateById: function(id, updateParams) {
+      return collection.updateById(id, updateParams);
+    },
     query: function(params) {
       params = params || {};
       return collection.find(params);
