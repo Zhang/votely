@@ -1,9 +1,5 @@
 <ion-view view-title="Cards">
     <ion-pane>
-      <ion-header-bar class="bar-default">
-        <h1 class="title">TD Cards</h1>
-      </ion-header-bar>
-
       <td-cards>
         <!-- additional methods: on-destroy and on-partial-swipe -->
         <td-card ng-repeat="card in cards" on-swipe-left="cardSwipedLeft(card)" on-swipe-right="cardSwipedRight(card)" class="card-{{$index}}">
