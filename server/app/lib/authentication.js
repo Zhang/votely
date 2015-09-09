@@ -4,6 +4,7 @@ const session = require('koa-session');
 const passport = require('koa-passport');
 const accountModel = require('../models/account');
 const LocalStrategy = require('passport-local').Strategy;
+const co = require('co');
 
 passport.serializeUser(function(user, done) {
   console.log(user);
@@ -17,11 +18,13 @@ passport.deserializeUser(function* (id, done) {
   done(null, user);
 });
 
-passport.use(new LocalStrategy(function* (email, password, done) {
-  const user = yield accountModel.getByEmail(email);
-  console.log(user);
-  if (user && user.password === password) return done(null, user);
-  done(null, false);
+passport.use(new LocalStrategy(function (email, password, done) {
+  //const user = yield accountModel.getByEmail(email);
+  co(function* () {
+    const account = yield accountModel.getByEmail(email);
+    if (account && account.password === password) return done(null, account);
+    done(null, false);
+  });
 }));
 
 /*
@@ -49,8 +52,12 @@ module.exports = {
   },
   passport: passport,
   isAuthenticated: function* (next) {
-    if (this.isAuthenticated()) return yield next;
-    this.status = 401;
+    if (this.isAuthenticated()) {
+      yield next;
+    } else {
+      console.log('wtf');
+      this.status = 401;
+    }
   }
 };
 

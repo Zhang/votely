@@ -6,6 +6,7 @@
 
 const accountModel = require('../../models/account');
 const authentication = require('../../lib/authentication');
+
 /**
  * upload a photo. Handles multipart uploads only.
  */
@@ -21,13 +22,13 @@ const create = function* create(next) {
   });
 
   yield authentication.passport.authenticate('local', function* (err, user, info) {
-    console.log('wtf');
     if (err) throw err;
-    if (!user) {
+    if (user === false) {
       self.status = 401;
       self.body = info;
     } else {
       self.status = 201;
+      self.body = user;
       yield self.login(user);
     }
   }).call(this, next);

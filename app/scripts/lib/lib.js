@@ -1,5 +1,5 @@
 'use strict';
 
 (function() {
-  var app = angular.module('lib', ['lib.camera']);
+  angular.module('lib', ['lib.camera']);
 })();

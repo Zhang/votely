@@ -40,7 +40,7 @@ app.use(function* authenticatePrivateRoutes(next) {
     });
   }
 
-  if (isPublicRoute(this.originalUrl, this.request.METHOD)) {
+  if (isPublicRoute(this.originalUrl, this.request.method)) {
     yield next;
   } else {
     yield authentication.isAuthenticated(next);

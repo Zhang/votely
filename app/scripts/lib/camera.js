@@ -15,6 +15,6 @@
 
         return $cordovaCamera.getPicture(config);
       }
-    }
+    };
   });
 })();

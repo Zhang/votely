@@ -13,7 +13,7 @@ const AccountSchema = Joi.object().keys({
 const modelCRUD = require('./concerns/modelCRUD')('account', collection, AccountSchema);
 
 function getByEmail(email) {
-  collection.find({email: email});
+  return collection.findOne({email: email});
 }
 
 module.exports = {
