@@ -10,13 +10,11 @@ const co = require('co');
 const errors = require('./errors');
 
 passport.serializeUser(function(user, done) {
-  console.log('serializeUser');
   done(null, user._id);
 });
 
 passport.deserializeUser(function (id, done) {
   co(function* () {
-    console.log('deserializeUser');
     const user = yield accountModel.get(id);
     done(null, user);
   });
