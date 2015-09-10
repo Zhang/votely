@@ -12,13 +12,13 @@
     }
     var AccountManager = {
       login: function login(email, password) {
-        sendCredentials(ENV.apiEndpoint + 'login', {
+        return sendCredentials(ENV.apiEndpoint + 'login', {
           username: email,
           password: password
         }, this);
       },
       signup: function signup(email, password) {
-        sendCredentials(ACCOUNT_ENDPOINT, {
+        return sendCredentials(ACCOUNT_ENDPOINT, {
           username: email,
           password: password
         }, this);

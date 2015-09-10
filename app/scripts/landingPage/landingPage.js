@@ -29,7 +29,7 @@
       }, function reject() {
         $ionicPopup.alert({
           title: 'Invalid Email',
-          template: 'Seems like someone is already using that email address, and you wont be able to claim it'
+          template: 'Seems like someone is already using that email address, and you cannot claim it'
         });
       });
     };
