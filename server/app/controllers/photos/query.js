@@ -3,7 +3,8 @@
 const photoModel = require('../../models/photos');
 
 const query = function* query() {
-  this.body = yield photoModel.query();
+  const body = this.request.body;
+  this.body = yield photoModel.query(body);
   this.status = 200;
 };
 

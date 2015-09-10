@@ -7,6 +7,7 @@ const authentication = require('./lib/authentication');
 
 router.post('/', function* () {
   const body = this.request.body;
+  console.log(body);
   if (!body.username || !body.password) throw new errors.LoginError();
   yield authentication.login.call(this);
 });

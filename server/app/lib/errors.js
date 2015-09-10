@@ -21,7 +21,7 @@ NotFoundError.prototype = Object.create(Error.prototype);
 NotFoundError.prototype.constructor = NotFoundError;
 
 function AuthenticationError(info) {
-  console.log('Not atuthenticated: ', info);
+  console.log('Not authenticated: ', info);
   this.name = 'AuthenticationError';
   this.message = 'Not authenticated';
   this.status = 401;

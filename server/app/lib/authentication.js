@@ -10,7 +10,7 @@ const co = require('co');
 const errors = require('./errors');
 
 passport.serializeUser(function(user, done) {
-  done(null, user._id);
+  done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
@@ -23,6 +23,7 @@ passport.deserializeUser(function (id, done) {
 passport.use(new LocalStrategy(function (email, password, done) {
   co(function* () {
     const account = yield accountModel.getByEmail(email);
+    console.log(account);
     if (account && account.password === password) return done(null, account);
     done(null, false);
   });

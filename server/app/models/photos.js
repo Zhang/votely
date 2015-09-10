@@ -7,6 +7,7 @@ const _ = require('lodash');
 
 const PhotoSchema = Joi.object().keys({
   _id: Joi.string(),
+  id: Joi.string().required(),
   upvote: Joi.number().required(),
   downvote: Joi.number().required(),
   key: Joi.string().required(),

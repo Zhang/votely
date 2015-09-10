@@ -9,6 +9,7 @@ const _ = require('lodash');
 const PhotoSchema = Joi.string().description('strings corresponding to the _id of photos');
 const AccountSchema = Joi.object().keys({
   _id: Joi.string(),
+  id: Joi.string().required(),
   email: Joi.string().required(),
   password: Joi.string().required(),
   connections: Joi.array().items(Joi.string().description('strings corresponding to the _id of other users')).required(),
