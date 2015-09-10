@@ -33,8 +33,8 @@
       }
       //get account if session is present, else direct to login/signup
       $state.go('landingPage');
-      $rootScope.$on(NavbarManager.EVENTS.pictureUploaded, function(res) {
-        console.log(res);
+      $rootScope.$on(NavbarManager.EVENTS.pictureUploaded, function(evt, res) {
+        var photoData = JSON.parse(res.response);
       });
     });
   });

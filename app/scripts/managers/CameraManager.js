@@ -15,9 +15,13 @@
         onFailure = onFailure || function success(err) { console.log('Error: ' + JSON.stringify(err)); };
         return function getAndUploadPicture() {
           Camera.getPicture().then(function success(data) {
-            $cordovaFileTransfer.upload(ENV + 'photos', data, options).then(onSuccess, onFailure);
+            $cordovaFileTransfer.upload(ENV.apiEndpoint + 'photos', data, options).then(onSuccess, onFailure);
           });
         };
+      },
+      currentPhoto: {},
+      setCurrentPhoto: function(photo) {
+        this.currentPhoto = photo;
       }
     };
 

@@ -18,9 +18,9 @@
         });
       };
 
-      this.query = function query() {
+      this.query = function query(params) {
         var self = this;
-        return $http.get(PHOTOS_ENDPOINT).then(function(res) {
+        return $http.get(PHOTOS_ENDPOINT, params || {}).then(function(res) {
           self.photos = res.data;
         });
       };

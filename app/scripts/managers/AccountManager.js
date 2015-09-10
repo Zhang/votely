@@ -12,7 +12,7 @@
     }
     var AccountManager = {
       login: function login(email, password) {
-        return sendCredentials(ENV.apiEndpoint + 'login', {
+        return sendCredentials(ENV.apiEndpoint + 'login/', {
           username: email,
           password: password
         }, this);
@@ -34,7 +34,7 @@
       connect: function connect(connectWith) {
         var self = this;
         return $http.post(ACCOUNT_ENDPOINT + 'connect/' + connectWith).then(function resolve() {
-          $http.get(ACCOUNT_ENDPOINT + self.currentUser._id).then(function(res) {
+          $http.get(ACCOUNT_ENDPOINT + self.currentUser.id).then(function(res) {
             self.currentUser = res.data;
           });
         },

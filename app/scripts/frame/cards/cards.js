@@ -17,7 +17,7 @@
       resolve: {
         photosManager: function(PhotosManager) {
           var photosManager = new PhotosManager();
-          return photosManager.query().then(function() {
+          return photosManager.query({limit: 5}).then(function() {
             return photosManager;
           });
         }
@@ -32,13 +32,13 @@
     function addCard() {}
 
     $scope.cardSwipedLeft = function(card) {
-      photosManager.upvote(card._id).then(function() {
+      photosManager.upvote(card.id).then(function() {
         addCard();
       });
     };
 
     $scope.cardSwipedRight = function(card) {
-      photosManager.downvote(card._id).then(function() {
+      photosManager.downvote(card.id).then(function() {
         addCard();
       });
     };
