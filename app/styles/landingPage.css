@@ -2,7 +2,8 @@ div.list.landing {
   position: relative;
 }
 
-button.button-full {
+div.button-group {
   position: absolute;
   bottom: 0;
+  width: 100%;
 }
