@@ -4,11 +4,14 @@
   var app = angular.module('vote.managers.navbar', ['vote.managers.camera']);
   app.factory('NavbarManager', function(CameraManager, $rootScope) {
     var EVENTS = {
-      addConnection: 'navbar-add-connection'
+      addConnection: 'navbar-add-connection',
+      pictureUploaded: 'navbar-picture-added'
     };
     var cameraSettings = {
       rightIcon: 'ion-camera',
-      action: CameraManager.getAndUploadPicture
+      action: CameraManager.getAndUploadPicture(function success(res) {
+        $rootScope.$broadcast(EVENTS.pictureUploaded, res);
+      })
     };
 
     var connectionSettings = {

@@ -18,7 +18,7 @@
      $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
   })
 
-  .run(function($ionicPlatform, $state) {
+  .run(function($ionicPlatform, $state, $rootScope, NavbarManager) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -33,7 +33,10 @@
       }
       //get account if session is present, else direct to login/signup
       $state.go('landingPage');
+      $rootScope.$on(NavbarManager.EVENTS.pictureUploaded, function(res) {
+        console.log(res);
+      });
     });
-  })
+  });
 })();
 
