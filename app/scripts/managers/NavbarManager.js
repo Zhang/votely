@@ -14,7 +14,7 @@
     var connectionSettings = {
       rightIcon: 'ion-plus-round',
       action: function() {
-        $rootScope.emit(EVENTS.addConnection);
+        $rootScope.$broadcast(EVENTS.addConnection);
       }
     };
 

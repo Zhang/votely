@@ -15,20 +15,23 @@
         }
       },
       resolve: {
-        Friends: function(AccountManager) {
-          return AccountManager.getFriends();
+        Connections: function(AccountManager) {
+          return AccountManager.getConnections();
         }
       }
     });
   });
 
-  app.controller('ConnectionsController', function($scope, $rootScope, Friends, NavbarManager, AccountManager) {
+  app.controller('ConnectionsController', function($scope, $rootScope, Connections, NavbarManager, AccountManager) {
     NavbarManager.useConnections();
-    $scope.friends = Friends;
+    $scope.connections = Connections;
     $scope.showAdd = false;
     $rootScope.$on(NavbarManager.EVENTS.addConnection, function() {
       $scope.showAdd = true;
     });
-    $scope.connect = AccountManager.connect;
+    $scope.connect = function(email) {
+      $scope.showAdd = false;
+      AccountManager.connect(email);
+    };
   });
 })();
