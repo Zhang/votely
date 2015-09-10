@@ -3,6 +3,7 @@
 (function() {
   angular.module('votelly', [
     'ionic',
+    'ngCookies',
     'lib',
     'ui.router',
     'vote.cards',
@@ -12,7 +13,7 @@
     'landingPage'
   ])
 
-  .config(function($compileProvider,  $httpProvider) {
+  .config(function($compileProvider, $httpProvider) {
      $httpProvider.defaults.withCredentials = true;
      $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
   })
@@ -34,9 +35,5 @@
       $state.go('landingPage');
     });
   })
-  .service('account', function(AccountManager) {
-    var accountManager = new AccountManager();
-    return accountManager;
-  });
 })();
 

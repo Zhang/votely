@@ -55,6 +55,7 @@ app.use(function* authenticatePrivateRoutes(next) {
 /**
  * Routes.
  */
+app.use(mount('/login', require('./login')));
 app.use(mount('/photos', require('./controllers/photos')));
 app.use(mount('/accounts', require('./controllers/accounts')));
 
