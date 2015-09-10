@@ -8,6 +8,7 @@
     'vote.cards',
     'vote.navbar',
     'vote.router',
+    'vote.connections',
     'landingPage'
   ])
 

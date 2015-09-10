@@ -13,9 +13,8 @@
   });
 
   app.controller('LandingController', function($scope, $state, AccountManager, $ionicPopup) {
-    var accountManager = new AccountManager();
     $scope.signup = function(email, password) {
-      accountManager.signup(email, password).then(function resolve() {
+      AccountManager.signup(email, password).then(function resolve() {
         $state.go('app.cards');
       }, function reject() {
         $ionicPopup.alert({

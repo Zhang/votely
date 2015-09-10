@@ -1,0 +1,17 @@
+<ion-list>
+  <ion-item ng-if="showAdd">
+    <div class="list list-inset">
+      <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+          <input type="text" placeholder="Email" ng-model="email">
+        </label>
+        <button ng-click="connect(email)" class="button button-small">
+          Submit
+        </button>
+      </div>
+    </div>
+  </ion-item>
+  <ion-item ng-repeat="connection in connections">
+    Hello, {{connection.email}}!
+  </ion-item>
+</ion-list>

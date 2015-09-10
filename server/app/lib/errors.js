@@ -11,6 +11,15 @@ function DuplicateError(type, value) {
 DuplicateError.prototype = Object.create(Error.prototype);
 DuplicateError.prototype.constructor = DuplicateError;
 
+function NotFoundError(type, value) {
+  this.name = 'NotFoundError';
+  this.message = 'Unable to find ' + type + ' with value : ' + JSON.stringify(value);
+  this.status = 400;
+  this.stack = (new Error()).stack;
+}
+NotFoundError.prototype = Object.create(Error.prototype);
+NotFoundError.prototype.constructor = NotFoundError;
+
 function AuthenticationError(info) {
   console.log('Not atuthenticated: ', info);
   this.name = 'AuthenticationError';
@@ -29,5 +38,6 @@ module.exports = {
     });
   },
   DuplicateError: DuplicateError,
-  AuthenticationError: AuthenticationError
+  AuthenticationError: AuthenticationError,
+  NotFoundError: NotFoundError
 };

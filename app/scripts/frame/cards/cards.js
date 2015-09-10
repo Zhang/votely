@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-  var app = angular.module('vote.cards', ['ionic.contrib.ui.tinderCards', 'vote.managers.photos']);
+  var app = angular.module('vote.cards', ['ionic.contrib.ui.tinderCards', 'vote.managers.photos', 'vote.managers.navbar']);
 
   app.config(function($stateProvider) {
     $stateProvider
@@ -25,7 +25,8 @@
     });
   });
 
-  app.controller('CardsController', function($scope, $stateParams, photosManager) {
+  app.controller('CardsController', function($scope, $stateParams, photosManager, NavbarManager) {
+    NavbarManager.useCamera();
     $scope.cards = photosManager.photos;
 
     function addCard() {}
