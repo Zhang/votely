@@ -35,9 +35,5 @@
       $state.go('landingPage');
     });
   })
-  .service('account', function(AccountManager) {
-    var accountManager = new AccountManager();
-    return accountManager;
-  });
 })();
 

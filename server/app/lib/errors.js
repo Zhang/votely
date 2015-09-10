@@ -30,6 +30,15 @@ function AuthenticationError(info) {
 AuthenticationError.prototype = Object.create(Error.prototype);
 AuthenticationError.prototype.constructor = AuthenticationError;
 
+function LoginError() {
+  this.name = 'LoginError';
+  this.message = 'Failed Login';
+  this.status = 400;
+  this.stack = (new Error()).stack;
+}
+LoginError.prototype = Object.create(Error.prototype);
+LoginError.prototype.constructor = LoginError;
+
 module.exports = {
   initialize: function(app) {
     onerror(app);
@@ -39,5 +48,6 @@ module.exports = {
   },
   DuplicateError: DuplicateError,
   AuthenticationError: AuthenticationError,
-  NotFoundError: NotFoundError
+  NotFoundError: NotFoundError,
+  LoginError: LoginError
 };

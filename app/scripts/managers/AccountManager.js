@@ -5,17 +5,25 @@
   app.factory('AccountManager', function(ENV, $http, $ionicPopup) {
     var ACCOUNT_ENDPOINT = ENV.apiEndpoint + 'accounts/';
 
+    function sendCredentials(route, credentials, context) {
+      return $http.post(route, credentials).then(function(res) {
+        context.currentUser = res.data;
+      });
+    }
     var AccountManager = {
-      signup: function upvote(email, password) {
-        var self = this;
-        return $http.post(ACCOUNT_ENDPOINT, {
+      login: function login(email, password) {
+        sendCredentials(ENV.apiEndpoint + 'login', {
           username: email,
           password: password
-        }).then(function(res) {
-          self.currentUser = res.data;
-        });
+        }, this);
       },
-      getConnections: function() {
+      signup: function signup(email, password) {
+        sendCredentials(ACCOUNT_ENDPOINT, {
+          username: email,
+          password: password
+        }, this);
+      },
+      getConnections: function getConnections() {
         var self = this;
         return $http.post(ACCOUNT_ENDPOINT + 'query/', {
           ids: self.currentUser.connections
@@ -23,7 +31,7 @@
           return res.data;
         });
       },
-      connect: function(connectWith) {
+      connect: function connect(connectWith) {
         var self = this;
         return $http.post(ACCOUNT_ENDPOINT + 'connect/' + connectWith).then(function resolve() {
           $http.get(ACCOUNT_ENDPOINT + self.currentUser._id).then(function(res) {
