@@ -25,7 +25,8 @@
     });
   });
 
-  app.controller('CardsController', function($scope, $stateParams, photosManager, NavbarManager) {
+  app.controller('CardsController', function($scope, $stateParams, photosManager, NavbarManager, $cookies) {
+    console.log($cookies);
     NavbarManager.useCamera();
     $scope.cards = photosManager.photos;
 
