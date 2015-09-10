@@ -1,4 +1,14 @@
 <ion-list>
+  <ion-item ng-if="showAdd">
+    <div class="list list-inset">
+      <label class="item item-input">
+        <input type="text" placeholder="Email" ng-model="email">
+      </label>
+      <label class="item item-input">
+        <input type="submit" ng-click="connect(email)">
+      </label>
+    </div>
+  </ion-item>
   <ion-item ng-repeat="friend in friends">
     Hello, {{friend.email}}!
   </ion-item>

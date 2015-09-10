@@ -7,7 +7,6 @@ const accountModel = require('../../models/account');
 const query = function* query() {
   const body = this.request.body;
   const queryParams = {};
-
   if (body.ids) {
     queryParams._id = {$in: body.ids};
   }

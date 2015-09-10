@@ -3,6 +3,9 @@
 (function() {
   var app = angular.module('vote.managers.navbar', ['vote.managers.camera']);
   app.factory('NavbarManager', function(CameraManager, $rootScope) {
+    var EVENTS = {
+      addConnection: 'navbar-add-connection'
+    };
     var cameraSettings = {
       rightIcon: 'ion-camera',
       action: CameraManager.getAndUploadPicture
@@ -11,7 +14,7 @@
     var connectionSettings = {
       rightIcon: 'ion-plus-round',
       action: function() {
-        $rootScope.emit('navbar-add-connection');
+        $rootScope.emit(EVENTS.addConnection);
       }
     };
 
@@ -22,7 +25,8 @@
       },
       useCamera: function() {
         this.settings = cameraSettings;
-      }
+      },
+      EVENTS: EVENTS
     };
   });
 })();

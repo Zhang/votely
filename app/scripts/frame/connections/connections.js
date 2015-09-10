@@ -22,8 +22,13 @@
     });
   });
 
-  app.controller('ConnectionsController', function($scope, Friends, NavbarManager) {
+  app.controller('ConnectionsController', function($scope, $rootScope, Friends, NavbarManager, AccountManager) {
     NavbarManager.useConnections();
     $scope.friends = Friends;
+    $scope.showAdd = false;
+    $rootScope.$on(NavbarManager.EVENTS.addConnection, function() {
+      $scope.showAdd = true;
+    });
+    $scope.connect = AccountManager.connect;
   });
 })();
