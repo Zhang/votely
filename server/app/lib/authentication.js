@@ -48,7 +48,8 @@ module.exports = {
     app.keys = ['secrsset'];
     app.use(session({
       cookie: {
-        maxAge: 100000
+        maxAge: 100000,
+        httpOnly: false
       },
       store: mongoStore.create({
         db: db.driver,

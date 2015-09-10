@@ -32,7 +32,7 @@
         StatusBar.styleDefault();
       }
       //get account if session is present, else direct to login/signup
-      $state.go('app.cards');
+      $state.go('landingPage');
     });
   })
   .service('account', function(AccountManager) {
