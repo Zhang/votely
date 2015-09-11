@@ -75,10 +75,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js'],
         tasks: ['htmlbuild:dist', 'newer:copy:app']
       },
-      // less: {
-      //   files: ['<%= yeoman.app %>/<%= yeoman.styles %>/**/*.less'],
-      //   tasks: ['less:build', 'newer:copy:styles', 'autoprefixer', 'newer:copy:tmp']
-      // },
+      less: {
+        files: ['<%= yeoman.app %>/<%= yeoman.styles %>/**/*.less'],
+        tasks: ['less:build', 'newer:copy:styles', 'autoprefixer', 'newer:copy:tmp']
+      },
       gruntfile: {
         files: ['Gruntfile.js'],
         tasks: ['ngconstant:development', 'newer:copy:app']
