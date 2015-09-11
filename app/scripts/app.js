@@ -9,7 +9,7 @@
     'lib.uiHelpers',
     'vote.cards',
     'vote.navbar',
-    'vote.router',
+    'vote.main',
     'vote.share',
     'vote.connections',
     'vote.results',
@@ -21,7 +21,7 @@
      $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
   })
 
-  .run(function($ionicPlatform, $state, $rootScope, AccountManager) {
+  .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -34,17 +34,6 @@
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
-
-      $rootScope.initialized = false;
-      AccountManager.getCurrentAccount().then(function() {
-        $rootScope.initialized = true;
-        if (AccountManager.currentUser) {
-          $state.go('app.cards');
-        } else {
-          $state.go('landingPage');
-        }
-      });
-      //get account if session is present, else direct to login/signup
     });
   });
 })();

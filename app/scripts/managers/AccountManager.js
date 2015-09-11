@@ -17,6 +17,9 @@
           self.currentUser = res.data;
         });
       },
+      logout: function logout() {
+        return $http.post(ENV.apiEndpoint + 'logout');
+      },
       login: function login(email, password) {
         return sendCredentials(ENV.apiEndpoint + 'login/', {
           username: email,

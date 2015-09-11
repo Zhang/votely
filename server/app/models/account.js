@@ -16,7 +16,7 @@ const AccountSchema = Joi.object().keys({
   selfPhotos: Joi.array().items(PhotoSchema).required(),
   receivedPhotos: Joi.array().items(Joi.object().keys({
     id: PhotoSchema,
-    from: Joi.string().required()
+    from: Joi.string().required().description('account id of person who shared this photo')
   })).required()
 });
 
