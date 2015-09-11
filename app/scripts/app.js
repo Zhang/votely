@@ -12,6 +12,7 @@
     'vote.router',
     'vote.share',
     'vote.connections',
+    'vote.results',
     'landingPage'
   ])
 
@@ -20,7 +21,7 @@
      $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
   })
 
-  .run(function($ionicPlatform, $state) {
+  .run(function($ionicPlatform, $state, $rootScope, AccountManager) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -34,8 +35,16 @@
         StatusBar.styleDefault();
       }
 
+      $rootScope.initialized = false;
+      AccountManager.getCurrentAccount().then(function() {
+        $rootScope.initialized = true;
+        if (AccountManager.currentUser) {
+          $state.go('app.cards');
+        } else {
+          $state.go('landingPage');
+        }
+      });
       //get account if session is present, else direct to login/signup
-      $state.go('app.cards');
     });
   });
 })();

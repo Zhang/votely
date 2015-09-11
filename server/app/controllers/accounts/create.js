@@ -14,6 +14,7 @@ const create = function* create() {
   const body = this.request.body;
   const email = body.username;
   const password = body.password;
+
   yield accountModel.add({
     password: password,
     email: email

@@ -2,6 +2,7 @@
 
 const Joi = require('joi');
 const uuid = require('uuid');
+const _ = require('lodash');
 
 module.exports = function(collectionName, collection, schema) {
   return {
@@ -29,10 +30,14 @@ module.exports = function(collectionName, collection, schema) {
     },
     query: function query(params) {
       params = params || {};
-      const q = collection.find(params);
+      const optKeys = ['sort', 'limit', 'offset'];
+      const opts = _.pick(params, optKeys);
+      const filter = _.omit(params, optKeys);
 
-      if (params.limit) {
-        q.limit(params.limit);
+      const q = collection.find(filter);
+
+      if (opts.limit) {
+        q.limit(opts.limit);
       }
 
       return q;
