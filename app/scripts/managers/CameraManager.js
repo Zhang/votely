@@ -25,7 +25,6 @@
       return $cordovaFileTransfer.upload(ENV.apiEndpoint + 'photos', this.pendingPicture, options).then(function returnResJSON(res) {
         return JSON.parse(res.response);
       });
-      //.then(onSuccess, onFailure);
     };
 
     return CameraManager;
