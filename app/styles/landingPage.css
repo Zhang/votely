@@ -1,4 +1,5 @@
 div.list.landing {
+  background-color: @teal;
   position: relative;
 }
 
