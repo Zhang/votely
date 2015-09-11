@@ -7,7 +7,12 @@
     <span class="input-label">Password</span>
     <input type="password" placeholder="Password" ng-model="password">
   </label>
-  <button ng-click="signup(email, password)" class="button button-full button-positive">
-    Create Account
-  </button>
+  <div class="button-group bottom">
+    <button ng-click="signup(email, password)" class="button button-full button-positive">
+      Signup
+    </button>
+    <button ng-click="login(email, password)" class="button button-full button-positive">
+      Login
+    </button>
+  </div>
 </div>

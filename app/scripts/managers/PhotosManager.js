@@ -18,11 +18,15 @@
         });
       };
 
-      this.query = function query() {
+      this.query = function query(params) {
         var self = this;
-        return $http.get(PHOTOS_ENDPOINT).then(function(res) {
+        return $http.post(PHOTOS_ENDPOINT + 'query', params || {}).then(function(res) {
           self.photos = res.data;
         });
+      };
+
+      this.share = function share(id, accounts) {
+        return $http.post(PHOTOS_ENDPOINT + id + '/share', {accounts: accounts});
       };
     }
 

@@ -2,19 +2,29 @@
 
 (function() {
   var app = angular.module('vote.managers.navbar', ['vote.managers.camera']);
-  app.factory('NavbarManager', function(CameraManager, $rootScope) {
+  app.factory('NavbarManager', function(CameraManager, $rootScope, $state) {
     var EVENTS = {
-      addConnection: 'navbar-add-connection'
+      addConnection: 'navbar-add-connection',
+      sharePicture: 'navbar-share-picture'
     };
     var cameraSettings = {
       rightIcon: 'ion-camera',
-      action: CameraManager.getAndUploadPicture
+      action: CameraManager.getAndUploadPicture(function success(res) {
+        $state.go('app.share', {photoId: JSON.parse(res.response).id});
+      })
     };
 
     var connectionSettings = {
       rightIcon: 'ion-plus-round',
       action: function() {
         $rootScope.$broadcast(EVENTS.addConnection);
+      }
+    };
+
+    var shareSettings = {
+      rightIcon: 'ion-checkmark-round',
+      action: function() {
+        $rootScope.$broadcast(EVENTS.sharePicture);
       }
     };
 
@@ -25,6 +35,9 @@
       },
       useCamera: function() {
         this.settings = cameraSettings;
+      },
+      useShare: function() {
+        this.settings = shareSettings;
       },
       EVENTS: EVENTS
     };

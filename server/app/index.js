@@ -38,6 +38,10 @@ app.use(function* authenticatePrivateRoutes(next) {
   const PUBLIC_ROUTES = [{
     method: 'POST',
     url: '/accounts/'
+  },
+  {
+    method: 'POST',
+    url: '/login/'
   }];
 
   function isPublicRoute(url, method) {

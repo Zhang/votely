@@ -25,12 +25,12 @@ const create = function* create(next) {
   const key = `${uuid.v4()}.${ext}`;
   const upload = yield uploadPhoto(parts, key);
 
-  yield photoModel.add({
+  const response = yield photoModel.add({
     location: upload.Location,
     key: key
   });
 
-  // TODO: Don't accept blindly
+  this.body = response;
   this.status = 202;
 };
 

@@ -7,6 +7,7 @@
     $stateProvider
 
     .state('app.cards', {
+      cache: false,
       url: '/cards',
       views: {
         menuContent: {
@@ -15,33 +16,24 @@
         }
       },
       resolve: {
-        photosManager: function(PhotosManager) {
-          var photosManager = new PhotosManager();
-          return photosManager.query().then(function() {
-            return photosManager;
-          });
+        Photos: function(PhotosManager, AccountManager) {
+          AccountManager.getReceivedPhotos();
         }
       }
     });
   });
 
-  app.controller('CardsController', function($scope, $stateParams, photosManager, NavbarManager, $cookies) {
-    console.log($cookies);
+  app.controller('CardsController', function($scope, $stateParams, Photos, PhotosManager, NavbarManager) {
     NavbarManager.useCamera();
-    $scope.cards = photosManager.photos;
-
-    function addCard() {}
+    $scope.cards = Photos;
+    var photosManager = new PhotosManager();
 
     $scope.cardSwipedLeft = function(card) {
-      photosManager.upvote(card._id).then(function() {
-        addCard();
-      });
+      photosManager.upvote(card.id);
     };
 
     $scope.cardSwipedRight = function(card) {
-      photosManager.downvote(card._id).then(function() {
-        addCard();
-      });
+      photosManager.downvote(card.id);
     };
   });
 })();

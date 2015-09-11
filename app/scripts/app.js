@@ -9,6 +9,7 @@
     'vote.cards',
     'vote.navbar',
     'vote.router',
+    'vote.share',
     'vote.connections',
     'landingPage'
   ])
@@ -32,8 +33,8 @@
         StatusBar.styleDefault();
       }
       //get account if session is present, else direct to login/signup
-      $state.go('landingPage');
+      $state.go('app.cards');
     });
-  })
+  });
 })();
 

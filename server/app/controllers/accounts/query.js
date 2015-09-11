@@ -7,8 +7,9 @@ const accountModel = require('../../models/account');
 const query = function* query() {
   const body = this.request.body;
   const queryParams = {};
+
   if (body.ids) {
-    queryParams._id = {$in: body.ids};
+    queryParams.id = {$in: body.ids};
   }
 
   this.body = yield accountModel.query(queryParams);
