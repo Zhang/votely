@@ -5,7 +5,7 @@ const photoModel = require('../../models/photos');
 const query = function* query() {
   const body = this.request.body;
   var params = {};
-  console.log(body);
+
   if (body.ids) {
     params.id = {$in: body.ids};
   }
