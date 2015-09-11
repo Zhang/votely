@@ -11,7 +11,7 @@ const query = function* query() {
   if (body.ids) {
     queryParams.id = {$in: body.ids};
   }
-  console.log(queryParams);
+
   this.body = yield accountModel.query(queryParams);
   this.status = 200;
 };

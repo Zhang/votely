@@ -11,7 +11,7 @@
       </div>
     </div>
   </ion-item>
-  <ion-item ng-repeat="connection in connections" ng-click="onClick(connection)">
+  <ion-item ng-repeat="connection in connections" toggle-class="item-active" ng-click="onClick(connection)">
     {{connection.email}}
   </ion-item>
 </ion-list>

@@ -9,6 +9,7 @@
     'vote.cards',
     'vote.navbar',
     'vote.router',
+    'vote.share',
     'vote.connections',
     'landingPage'
   ])
@@ -18,7 +19,7 @@
      $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
   })
 
-  .run(function($ionicPlatform, $state, $rootScope, NavbarManager) {
+  .run(function($ionicPlatform, $state) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -32,10 +33,7 @@
         StatusBar.styleDefault();
       }
       //get account if session is present, else direct to login/signup
-      $state.go('landingPage');
-      $rootScope.$on(NavbarManager.EVENTS.pictureUploaded, function(evt, res) {
-        var photoData = JSON.parse(res.response);
-      });
+      $state.go('app.cards');
     });
   });
 })();

@@ -18,10 +18,6 @@
             $cordovaFileTransfer.upload(ENV.apiEndpoint + 'photos', data, options).then(onSuccess, onFailure);
           });
         };
-      },
-      currentPhoto: {},
-      setCurrentPhoto: function(photo) {
-        this.currentPhoto = photo;
       }
     };
 

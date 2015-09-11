@@ -5,13 +5,12 @@
   app.factory('NavbarManager', function(CameraManager, $rootScope, $state) {
     var EVENTS = {
       addConnection: 'navbar-add-connection',
-      pictureUploaded: 'navbar-picture-added'
+      sharePicture: 'navbar-share-picture'
     };
     var cameraSettings = {
       rightIcon: 'ion-camera',
       action: CameraManager.getAndUploadPicture(function success(res) {
-        CameraManager.setCurrentPhoto(res);
-        $state.go('app.share');
+        $state.go('app.share', {photoId: JSON.parse(res.response).id});
       })
     };
 
@@ -22,7 +21,12 @@
       }
     };
 
-    var shareSettings = {};
+    var shareSettings = {
+      rightIcon: 'ion-checkmark-round',
+      action: function() {
+        $rootScope.$broadcast(EVENTS.sharePicture);
+      }
+    };
 
     return {
       settings: cameraSettings,

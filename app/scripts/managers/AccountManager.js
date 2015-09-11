@@ -2,7 +2,7 @@
 
 (function() {
   var app = angular.module('vote.managers.account', ['config', 'ngResource']);
-  app.factory('AccountManager', function(ENV, $http, $ionicPopup) {
+  app.factory('AccountManager', function(ENV, $http, $ionicPopup, PhotosManager) {
     var ACCOUNT_ENDPOINT = ENV.apiEndpoint + 'accounts/';
 
     function sendCredentials(route, credentials, context) {
@@ -44,6 +44,10 @@
             template: 'We cant find anyone by that email address, can you try again?'
           });
         });
+      },
+      getReceivedPhotos: function() {
+        var photosManager = new PhotosManager();
+        return photosManager.query({ids: _.map(this.currentUser.receivedPhotos, 'id')})
       },
       currentUser: {}
     };

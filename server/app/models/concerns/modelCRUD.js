@@ -5,7 +5,7 @@ const uuid = require('uuid');
 
 module.exports = function(collectionName, collection, schema) {
   return {
-    create: function(toAdd) {
+    create: function create(toAdd) {
       toAdd.id = toAdd.id || uuid.v4();
 
       var validity = Joi.validate(toAdd, schema);
@@ -18,13 +18,16 @@ module.exports = function(collectionName, collection, schema) {
 
       return collection.insert(toAdd);
     },
-    get: function(id) {
+    get: function get(id) {
       return collection.findOne({id: id});
     },
-    updateById: function(id, updateParams) {
-      return collection.update({id: id}, updateParams);
+    bulkUpdate: function bulkUpdate(ids, updateParams) {
+      return collection.update({id: {$in: ids}}, updateParams, {multi: true})
     },
-    query: function(params) {
+    updateById: function updateById(id, updateParams) {
+      return this.bulkUpdate([id], updateParams);
+    },
+    query: function query(params) {
       params = params || {};
       const q = collection.find(params);
 

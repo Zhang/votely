@@ -4,17 +4,19 @@ const db = require('../db');
 const collection = db.get('account');
 const Joi = require('joi');
 const errors = require('../lib/errors');
-const _ = require('lodash');
 
-const PhotoSchema = Joi.string().description('strings corresponding to the _id of photos');
+const PhotoSchema = Joi.string().description('strings corresponding to the id of photos');
 const AccountSchema = Joi.object().keys({
   _id: Joi.string(),
   id: Joi.string().required(),
   email: Joi.string().required(),
   password: Joi.string().required(),
-  connections: Joi.array().items(Joi.string().description('strings corresponding to the _id of other users')).required(),
+  connections: Joi.array().items(Joi.string().description('strings corresponding to the id of other users')).required(),
   selfPhotos: Joi.array().items(PhotoSchema).required(),
-  receivedPhotos: Joi.array().items(PhotoSchema).required()
+  receivedPhotos: Joi.array().items(Joi.object().keys({
+    id: PhotoSchema,
+    from: Joi.string().required()
+  })).required()
 });
 
 const modelCRUD = require('./concerns/modelCRUD')('account', collection, AccountSchema);
@@ -45,5 +47,6 @@ module.exports = {
   get: modelCRUD.get,
   query: modelCRUD.query,
   getByEmail: getByEmail,
-  connect: connect
+  connect: connect,
+  bulkUpdate: modelCRUD.bulkUpdate
 };

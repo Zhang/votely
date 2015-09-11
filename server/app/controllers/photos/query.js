@@ -4,7 +4,13 @@ const photoModel = require('../../models/photos');
 
 const query = function* query() {
   const body = this.request.body;
-  this.body = yield photoModel.query(body);
+  var params = {};
+  console.log(body);
+  if (body.ids) {
+    params.id = {$in: body.ids};
+  }
+
+  this.body = yield photoModel.query(params);
   this.status = 200;
 };
 

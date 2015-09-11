@@ -1,7 +1,6 @@
 'use strict';
 
 const accountModel = require('../../models/account');
-const _ = require('lodash');
 const errors = require('../../lib/errors');
 
 /**

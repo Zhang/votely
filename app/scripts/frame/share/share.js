@@ -12,7 +12,8 @@
     $stateProvider
 
     .state('app.share', {
-      url: '/share',
+      cache: false,
+      url: '/share/:photoId',
       views: {
         menuContent: {
           templateUrl: 'scripts/frame/share/share.html',
@@ -27,9 +28,28 @@
     });
   });
 
-  app.controller('ShareController', function($scope, $rootScope, Connections, NavbarManager, CameraManager) {
+  app.controller('ShareController', function($scope, $state, $rootScope, $stateParams, Connections, NavbarManager, PhotosManager) {
     NavbarManager.useShare();
-    $scope.picture = CameraManager.picture;
     $scope.connections = Connections;
+
+    var shareWith = {};
+    $scope.addConnection = function addConnection(connection) {
+      if (_.isUndefined(shareWith[connection.id])) {
+        shareWith[connection.id] = true;
+      } else {
+        shareWith[connection.id] = !shareWith[connection.email];
+      }
+    };
+
+    $rootScope.$on(NavbarManager.EVENTS.sharePicture, function() {
+      var photosManager = new PhotosManager();
+      var accounts = _.reduce(shareWith, function(sharedWith, toggled, email) {
+        return toggled ? sharedWith.concat(email) : sharedWith;
+      }, []);
+
+      photosManager.share($stateParams.photoId, accounts).then(function() {
+        $state.go('app.cards');
+      });
+    });
   });
 })();

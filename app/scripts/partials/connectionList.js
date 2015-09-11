@@ -4,7 +4,7 @@
   var app = angular.module('vote.partials.connectionList', ['vote.managers.account']);
   app.directive('connectionList', function() {
     return {
-      $scope: {
+      scope: {
         connections: '=',
         onClick: '=?'
       },
