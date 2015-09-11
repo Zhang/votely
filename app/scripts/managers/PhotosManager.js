@@ -1,8 +1,8 @@
 'use strict';
 
 (function() {
-  var app = angular.module('vote.managers.photos', ['config', 'ngResource']);
-  app.factory('PhotosManager', function($resource, ENV, $http) {
+  var app = angular.module('vote.managers.photos', ['config']);
+  app.factory('PhotosManager', function(ENV, $http) {
     var PHOTOS_ENDPOINT = ENV.apiEndpoint + 'photos/';
 
     function Helpers() {

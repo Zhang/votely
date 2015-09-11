@@ -14,9 +14,10 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  grunt.loadNpmTasks('grunt-html-build');
   // Define the configuration for all the tasks
   grunt.initConfig({
-
+    bowerPath: 'app/bower_components',
     // Project settings
     yeoman: {
       // configurable paths
@@ -62,19 +63,19 @@ module.exports = function (grunt) {
     watch: {
       bower: {
         files: ['bower.json'],
-        tasks: ['newer:copy:app']
+        tasks: ['htmlbuild:dist', 'newer:copy:app']
       },
       html: {
         files: ['<%= yeoman.app %>/**/*.html'],
-        tasks: ['newer:copy:app']
+        tasks: ['htmlbuild:dist', 'newer:copy:app']
       },
       js: {
         files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js'],
-        tasks: ['newer:copy:app']
+        tasks: ['htmlbuild:dist', 'newer:copy:app']
       },
       styles: {
         files: ['<%= yeoman.app %>/<%= yeoman.styles %>/**/*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer', 'newer:copy:tmp']
+        tasks: ['htmlbuild:dist', 'newer:copy:styles', 'autoprefixer', 'newer:copy:tmp']
       },
       gruntfile: {
         files: ['Gruntfile.js'],
@@ -200,6 +201,35 @@ module.exports = function (grunt) {
           src: ['*.html', '<%= yeoman.styles %>/**/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
+      }
+    },
+
+    htmlbuild: {
+      dist: {
+        src: '<%= yeoman.app %>/index.html',
+        dest: 'www/',
+        options: {
+          beautify: true,
+          relative: true,
+          scripts: {
+            bower: [
+              '<%= bowerPath %>/ionic/release/js/ionic.bundle.js',
+              '<%= bowerPath %>/angular-resource/angular-resource.js',
+              '<%= bowerPath %>/collide/collide.js',
+              '<%= bowerPath %>/ionic-ion-tinder-cards/ionic.tdcards.js',
+              '<%= bowerPath %>/lodash/lodash.js',
+              '<%= bowerPath %>/ngCordova/dist/ng-cordova.js'
+            ],
+            app: ['app/scripts/**/*.js']
+          },
+          styles: {
+            app: ['<%= yeoman.app %>/<%= yeoman.styles %>/**/*.css'],
+            bower: [
+              '<%= bowerPath %>/ionic/release/css/ionic.css',
+              '<%= bowerPath %>/ionic-ion-tinder-cards/ionic.tdcards.css'
+            ],
+          }
+        }
       }
     },
 

@@ -4,8 +4,9 @@
   angular.module('votelly', [
     'ionic',
     'ngCookies',
-    'lib',
     'ui.router',
+    'lib.camera',
+    'lib.uiHelpers',
     'vote.cards',
     'vote.navbar',
     'vote.router',
@@ -32,6 +33,7 @@
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
+
       //get account if session is present, else direct to login/signup
       $state.go('app.cards');
     });
