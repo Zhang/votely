@@ -17,8 +17,10 @@
           self.currentUser = res.data;
         });
       },
-      logout: function logout() {
-        return $http.post(ENV.apiEndpoint + 'logout');
+      logout: function logout($state) {
+        return $http.post(ENV.apiEndpoint + 'logout').then(function() {
+          $state.go('landingPage');
+        });
       },
       login: function login(email, password) {
         return sendCredentials(ENV.apiEndpoint + 'login/', {
