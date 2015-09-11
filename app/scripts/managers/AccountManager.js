@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-  var app = angular.module('vote.managers.account', ['config', 'ngResource']);
+  var app = angular.module('vote.managers.account', ['config']);
   app.factory('AccountManager', function(ENV, $http, $ionicPopup, PhotosManager) {
     var ACCOUNT_ENDPOINT = ENV.apiEndpoint + 'accounts/';
 
