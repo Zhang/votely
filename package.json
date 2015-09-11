@@ -17,6 +17,7 @@
     "grunt-contrib-cssmin": "0.11.0",
     "grunt-contrib-htmlmin": "0.3.0",
     "grunt-contrib-jshint": "0.11.0",
+    "grunt-contrib-less": "^1.0.1",
     "grunt-contrib-uglify": "0.7.0",
     "grunt-contrib-watch": "0.6.1",
     "grunt-html-build": "git+https://github.com/Zhang/grunt-html-build#90b91aa0bf99c7e91a7e5f00681bf2ef2ccf25b7",
