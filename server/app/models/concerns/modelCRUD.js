@@ -22,7 +22,7 @@ module.exports = function(collectionName, collection, schema) {
       return collection.findOne({id: id});
     },
     bulkUpdate: function bulkUpdate(ids, updateParams) {
-      return collection.update({id: {$in: ids}}, updateParams, {multi: true})
+      return collection.update({id: {$in: ids}}, updateParams, {multi: true});
     },
     updateById: function updateById(id, updateParams) {
       return this.bulkUpdate([id], updateParams);
