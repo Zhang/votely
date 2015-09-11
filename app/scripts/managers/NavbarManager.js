@@ -9,11 +9,12 @@
     };
     var cameraSettings = {
       rightIcon: 'ion-camera',
-      action: CameraManager.getAndUploadPicture(function success(res) {
-        $state.go('app.share', {photoId: JSON.parse(res.response).id});
-      })
+      action: function() {
+        CameraManager.getPicture().then(function success() {
+          $state.go('app.share');
+        });
+      }
     };
-
     var connectionSettings = {
       rightIcon: 'ion-plus-round',
       action: function() {

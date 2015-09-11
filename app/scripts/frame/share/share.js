@@ -13,7 +13,7 @@
 
     .state('app.share', {
       cache: false,
-      url: '/share/:photoId',
+      url: '/share',
       views: {
         menuContent: {
           templateUrl: 'scripts/frame/share/share.html',
@@ -28,7 +28,7 @@
     });
   });
 
-  app.controller('ShareController', function($scope, $state, $rootScope, $stateParams, Connections, NavbarManager, PhotosManager) {
+  app.controller('ShareController', function($scope, $state, $rootScope, Connections, NavbarManager, PhotosManager, CameraManager) {
     NavbarManager.useShare();
     $scope.connections = Connections;
 
@@ -47,8 +47,9 @@
         return toggled ? sharedWith.concat(email) : sharedWith;
       }, []);
 
-      photosManager.share($stateParams.photoId, accounts).then(function() {
-        $state.go('app.cards');
+      $state.go('app.cards');
+      CameraManager.upload().then(function(photo) {
+        photosManager.share(photo.id, accounts);
       });
     });
   });

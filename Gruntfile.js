@@ -17,7 +17,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-html-build');
   // Define the configuration for all the tasks
   grunt.initConfig({
-    bowerPath: 'app/bower_components',
+    bowerPath: '<%= yeoman.app %>/bower_components',
     // Project settings
     yeoman: {
       // configurable paths
@@ -210,7 +210,9 @@ module.exports = function (grunt) {
         dest: 'www/',
         options: {
           beautify: true,
-          relative: true,
+          replace: false,
+          relative: false,
+          removeRoot: '<%= yeoman.app %>/',
           scripts: {
             bower: [
               '<%= bowerPath %>/ionic/release/js/ionic.bundle.js',
@@ -220,7 +222,7 @@ module.exports = function (grunt) {
               '<%= bowerPath %>/lodash/lodash.js',
               '<%= bowerPath %>/ngCordova/dist/ng-cordova.js'
             ],
-            app: ['app/scripts/**/*.js']
+            app: ['<%= yeoman.app %>/scripts/**/*.js']
           },
           styles: {
             app: ['<%= yeoman.app %>/<%= yeoman.styles %>/**/*.css'],
