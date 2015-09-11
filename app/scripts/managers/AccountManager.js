@@ -11,6 +11,12 @@
       });
     }
     var AccountManager = {
+      getCurrentAccount: function getCurrentUser() {
+        var self = this;
+        return $http.get(ACCOUNT_ENDPOINT + 'current').then(function(res) {
+          self.currentUser = res.data;
+        });
+      },
       login: function login(email, password) {
         return sendCredentials(ENV.apiEndpoint + 'login/', {
           username: email,
@@ -47,7 +53,13 @@
       },
       getReceivedPhotos: function() {
         var photosManager = new PhotosManager();
-        return photosManager.query({ids: _.map(this.currentUser.receivedPhotos, 'id')})
+        return photosManager.query({ids: _.map(this.currentUser.receivedPhotos, 'id')});
+      },
+      getSelfPhotos: function() {
+        var photosManager = new PhotosManager();
+        return photosManager.query({ids: this.currentUser.selfPhotos}).then(function() {
+          return photosManager;
+        });
       },
       currentUser: {}
     };

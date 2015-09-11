@@ -514,7 +514,8 @@ module.exports = function (grunt) {
     'concurrent:server',
     'autoprefixer',
     'newer:copy:app',
-    'newer:copy:tmp'
+    'newer:copy:tmp',
+    'htmlbuild:dist'
   ]);
 
 

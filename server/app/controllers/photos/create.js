@@ -8,6 +8,7 @@ const parse = require('co-busboy');
 const uploadPhoto = require('../../lib/aws').upload;
 const extension = require('mime-types').extension;
 const photoModel = require('../../models/photos');
+const accountModel = require('../../models/account');
 const uuid = require('uuid');
 
 /**
@@ -29,6 +30,8 @@ const create = function* create(next) {
     location: upload.Location,
     key: key
   });
+
+  yield accountModel.associatePhoto(this.passport.user.id, response.id);
 
   this.body = response;
   this.status = 202;

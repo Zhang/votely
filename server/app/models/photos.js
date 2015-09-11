@@ -6,7 +6,7 @@ const Joi = require('joi');
 const _ = require('lodash');
 
 const PhotoSchema = Joi.object().keys({
-  _id: Joi.string(),
+  _id: Joi.string().description('Mongo _id, use id as the unique identifier'),
   id: Joi.string().required(),
   upvote: Joi.number().required(),
   downvote: Joi.number().required(),

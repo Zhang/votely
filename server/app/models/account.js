@@ -4,6 +4,7 @@ const db = require('../db');
 const collection = db.get('account');
 const Joi = require('joi');
 const errors = require('../lib/errors');
+const _ = require('lodash');
 
 const PhotoSchema = Joi.string().description('strings corresponding to the id of photos');
 const AccountSchema = Joi.object().keys({
@@ -42,11 +43,16 @@ function* connect(requester, connection) {
   yield modelCRUD.updateById(connection, {$push: {connections: requester}});
 }
 
+function* associatePhoto(accountId, photoId) {
+  yield modelCRUD.updateById(accountId, {$push: {selfPhotos: photoId}});
+}
+
 module.exports = {
   add: add,
   get: modelCRUD.get,
   query: modelCRUD.query,
   getByEmail: getByEmail,
   connect: connect,
-  bulkUpdate: modelCRUD.bulkUpdate
+  bulkUpdate: modelCRUD.bulkUpdate,
+  associatePhoto: associatePhoto
 };
