@@ -15,6 +15,8 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   grunt.loadNpmTasks('grunt-html-build');
+  grunt.loadNpmTasks('grunt-contrib-less');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
     bowerPath: '<%= yeoman.app %>/bower_components',
@@ -73,9 +75,9 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js'],
         tasks: ['htmlbuild:dist', 'newer:copy:app']
       },
-      styles: {
-        files: ['<%= yeoman.app %>/<%= yeoman.styles %>/**/*.css'],
-        tasks: ['htmlbuild:dist', 'newer:copy:styles', 'autoprefixer', 'newer:copy:tmp']
+      less: {
+        files: ['<%= yeoman.app %>/<%= yeoman.styles %>/**/*.less'],
+        tasks: ['less:build', 'newer:copy:styles', 'autoprefixer', 'newer:copy:tmp']
       },
       gruntfile: {
         files: ['Gruntfile.js'],
@@ -260,7 +262,7 @@ module.exports = function (grunt) {
         expand: true,
         cwd: '<%= yeoman.app %>/<%= yeoman.styles %>',
         dest: '.temp/<%= yeoman.styles %>/',
-        src: '{,*/}*.css'
+        src: 'styles.css'
       },
       fonts: {
         expand: true,
@@ -280,7 +282,7 @@ module.exports = function (grunt) {
         dest: '<%= yeoman.dist %>/',
         src: [
           '**/*',
-          '!**/*.(scss,sass,css)',
+          '!**/*.(less,scss,sass,css)',
         ]
       },
       tmp: {
@@ -315,31 +317,17 @@ module.exports = function (grunt) {
       ]
     },
 
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/<%= yeoman.styles %>/main.css': [
-    //         '.temp/<%= yeoman.styles %>/**/*.css',
-    //         '<%= yeoman.app %>/<%= yeoman.styles %>/**/*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/<%= yeoman.scripts %>/scripts.js': [
-    //         '<%= yeoman.dist %>/<%= yeoman.scripts %>/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
+    less: {
+      build: {
+        files: {
+          '<%= yeoman.app %>/styles/styles.css': '<%= yeoman.app %>/styles/app.less'
+        },
+        options: {
+          cleancss: true,
+          strictMath: true
+        }
+      }
+    },
 
     // Test settings
     // These will override any config options in karma.conf.js if you create it.
