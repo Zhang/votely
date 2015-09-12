@@ -19,9 +19,12 @@ const SYSTEM_ACCOUNT = {
   password: 'gpig',
   selfPhotos: [GPIG_1.id, GPIG_2.id]
 };
+(function* () {
+  //fix this up
+  console.log('hmmm');
+  yield accountModel.add(SYSTEM_ACCOUNT);
+  yield photosModel.add(GPIG_1);
+  yield photosModel.add(GPIG_2);
+  process.exit(0);
+})();
 
-accountModel.add(SYSTEM_ACCOUNT);
-photosModel.add(GPIG_1);
-photosModel.add(GPIG_2);
-
-process.exit(0);

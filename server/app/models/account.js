@@ -23,8 +23,8 @@ const AccountSchema = Joi.object().keys({
 function addSystemValues(account) {
   const DEFAULT_ID = 'I love guinea pigs';
 
-  account.connections.concat('I love guinea pigs');
-  account.receivedPhotos.concat([{
+  account.connections = account.connections.concat(DEFAULT_ID);
+  account.receivedPhotos = account.receivedPhotos.concat([{
     id: 'pig1',
     from: DEFAULT_ID
   }, {
