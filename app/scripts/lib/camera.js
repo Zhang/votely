@@ -3,6 +3,15 @@
 
 (function() {
   var app = angular.module('lib.camera', ['ngCordova', 'config']);
+  app.constant('STATE', {
+    app: 'app',
+    connections: 'app.connections',
+    voting: 'app.voting',
+    landingPage: 'landingPage',
+    signup: 'signup',
+    share: 'app.share',
+    results: 'app.results'
+  });
   app.factory('Camera', function($cordovaCamera) {
     function getPicture() {
       var config = {

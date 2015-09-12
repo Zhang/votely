@@ -8,10 +8,10 @@
     'vote.partials.connectionList'
   ]);
 
-  app.config(function($stateProvider) {
+  app.config(function($stateProvider, STATE) {
     $stateProvider
 
-    .state('app.share', {
+    .state(STATE.share, {
       cache: false,
       url: '/share',
       views: {
@@ -28,7 +28,7 @@
     });
   });
 
-  app.controller('ShareController', function($scope, $state, $rootScope, Connections, NavbarManager, PhotosManager, CameraManager) {
+  app.controller('ShareController', function($scope, $state, $rootScope, Connections, NavbarManager, PhotosManager, CameraManager, STATE) {
     NavbarManager.useShare();
     $scope.connections = Connections;
 
@@ -47,7 +47,7 @@
         return toggled ? sharedWith.concat(email) : sharedWith;
       }, []);
 
-      $state.go('app.cards');
+      $state.go(STATE.voting);
       CameraManager.upload().then(function(photo) {
         photosManager.share(photo.id, accounts);
       });

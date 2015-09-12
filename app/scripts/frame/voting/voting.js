@@ -3,27 +3,27 @@
 (function() {
   var app = angular.module('vote.cards', ['ionic.contrib.ui.tinderCards', 'vote.managers.photos', 'vote.managers.navbar']);
 
-  app.config(function($stateProvider) {
+  app.config(function($stateProvider, STATE) {
     $stateProvider
 
-    .state('app.cards', {
+    .state(STATE.voting, {
       cache: false,
-      url: '/cards',
+      url: '/voting/:connectionId',
       views: {
         menuContent: {
-          templateUrl: 'scripts/frame/cards/cards.html',
-          controller: 'CardsController'
+          templateUrl: 'scripts/frame/voting/voting.html',
+          controller: 'VotingController'
         }
       },
       resolve: {
-        Photos: function(PhotosManager, AccountManager) {
-          AccountManager.getReceivedPhotos();
+        Photos: function(AccountManager, $stateParams) {
+          AccountManager.getReceivedPhotos($stateParams.connectionId);
         }
       }
     });
   });
 
-  app.controller('CardsController', function($scope, $stateParams, Photos, PhotosManager, NavbarManager) {
+  app.controller('VotingController', function($scope, $stateParams, Photos, PhotosManager, NavbarManager) {
     NavbarManager.useCamera();
     $scope.cards = Photos;
     var photosManager = new PhotosManager();

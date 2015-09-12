@@ -2,7 +2,7 @@
 
 (function() {
   var app = angular.module('vote.managers.navbar', ['vote.managers.camera']);
-  app.factory('NavbarManager', function(CameraManager, $rootScope, $state) {
+  app.factory('NavbarManager', function(CameraManager, $rootScope, $state, STATE) {
     var EVENTS = {
       addConnection: 'navbar-add-connection',
       sharePicture: 'navbar-share-picture'
@@ -11,7 +11,7 @@
       rightIcon: 'ion-camera',
       action: function() {
         CameraManager.getPicture().then(function success() {
-          $state.go('app.share');
+          $state.go(STATE.share);
         });
       }
     };

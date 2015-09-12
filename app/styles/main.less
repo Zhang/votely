@@ -1,53 +1,38 @@
 .content-container {
   margin-top: 43px; /* counteract the navbar height */
+  height: calc(~"100vh - 43px")
 }
 
-td-cards {
-  display: block;
+.pane {
+  overflow-y: scroll;
+  background-color: transparent;
 }
 
-td-card {
+.button-float {
+  @button-float-diameter: 1.7em;
+  @button-float-position: 15px;
+  background-color: @primary;
+  color: white;
+  z-index: @z-index-top;
+  height: @button-float-diameter;
+  width: @button-float-diameter;
   position: absolute;
-  left: 50%;
-  margin-top: 80px;
-  margin-bottom: 40px;
-  margin-left: -150px;
-  width: 300px;
-  height: 300px;
-
-  border: 1px solid #999;
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
-  border-radius: 6px;
+  bottom: @button-float-position;
+  right: @button-float-position;
+  border-radius: 50%;
+  border: none;
+  font-size: 2em;
 }
 
-td-card .image {
-  position: relative;
+.content-container {
+  background-color: @background-gray;
 }
 
-td-card img {
-  max-width: 100%;
-  border-radius: 6px;
+.list-item-frame {
+  width: 97%;
+  margin: 5px auto;
 }
 
-.yes-text {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 30px;
-  color: rgb(111, 250, 111);
-  opacity: 0;
-}
-.no-text {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 30px;
-  color: rgb(255, 115, 115);
-  opacity: 0;
-}
-
-.fade {
-  -webkit-transition: 0.2s opacity linear;
-  transition: 0.2s opacity linear;
-  opacity: 0;
+.list-item {
+  margin-bottom: 2px;
 }

@@ -12,10 +12,10 @@
     });
   });
 
-  app.controller('LandingController', function($scope, $state, AccountManager, $ionicPopup) {
+  app.controller('LandingController', function($scope, $state, AccountManager, $ionicPopup, STATE) {
     $scope.login = function(email, password) {
       AccountManager.login(email, password).then(function resolve() {
-        $state.go('app.cards');
+        $state.go('app.connections');
       }, function reject() {
         $ionicPopup.alert({
           title: 'Login Failed',
@@ -23,15 +23,8 @@
         });
       });
     };
-    $scope.signup = function(email, password) {
-      AccountManager.signup(email, password).then(function resolve() {
-        $state.go('app.cards');
-      }, function reject() {
-        $ionicPopup.alert({
-          title: 'Invalid Email',
-          template: 'Seems like someone is already using that email address, and you cannot claim it'
-        });
-      });
+    $scope.goToSignup = function() {
+      $state.go(STATE.signup);
     };
   });
 })();

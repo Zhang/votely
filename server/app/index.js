@@ -6,6 +6,7 @@
 
 const bodyParser = require('koa-bodyparser');
 const koa = require('koa');
+const route = require('koa-route');
 const mount = require('koa-mount');
 const logger = require('koa-logger');
 const cors = require('kcors');
@@ -62,9 +63,8 @@ app.use(function* authenticatePrivateRoutes(next) {
 app.use(mount('/login', require('./login')));
 app.use(mount('/photos', require('./controllers/photos')));
 app.use(mount('/accounts', require('./controllers/accounts')));
-app.use(mount('/logout', function* logout(next) {
+app.use(route.post('/logout', function logout() {
   this.session = null;
-  yield next;
 }));
 /**
  * Exports.

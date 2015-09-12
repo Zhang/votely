@@ -1,1 +1,23 @@
-@teal: #74CC58;
+@primary: #5EB343;
+@background-gray: #d3d3d3;
+@opaque-white: rgba(255, 255, 255, 0.5);
+@opaque-white-darker: rgba(255, 255, 255, 0.8);
+
+@z-index-top: 10;
+@z-index-middle: 5;
+@z-index-bottom: 0;
+.placeholder-color(@color) {
+  ::-webkit-input-placeholder {
+    color: @color;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: @color;
+  }
+  ::-moz-placeholder {  /* Firefox 19+ */
+    color: @color;
+  }
+
+  :-ms-input-placeholder {
+    color: @color;
+  }
+}

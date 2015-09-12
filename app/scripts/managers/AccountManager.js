@@ -17,9 +17,9 @@
           self.currentUser = res.data;
         });
       },
-      logout: function logout($state) {
+      logout: function logout($state, STATE) {
         return $http.post(ENV.apiEndpoint + 'logout').then(function() {
-          $state.go('landingPage');
+          $state.go(STATE.landingPage);
         });
       },
       login: function login(email, password) {
@@ -56,9 +56,9 @@
           });
         });
       },
-      getReceivedPhotos: function() {
+      getReceivedPhotos: function(id) {
         var photosManager = new PhotosManager();
-        return photosManager.query({ids: _.map(this.currentUser.receivedPhotos, 'id')});
+        return photosManager.query({ids: _.filter(_.map(this.currentUser.receivedPhotos, 'id'), id || true)});
       },
       getSelfPhotos: function() {
         var photosManager = new PhotosManager();
