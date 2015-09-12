@@ -14,7 +14,8 @@
     'vote.share',
     'vote.connections',
     'vote.results',
-    'landingPage'
+    'landingPage',
+    'signup'
   ]);
 
   app.config(function($compileProvider, $httpProvider) {

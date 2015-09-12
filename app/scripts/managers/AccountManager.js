@@ -2,7 +2,7 @@
 
 (function() {
   var app = angular.module('vote.managers.account', ['config']);
-  app.factory('AccountManager', function(ENV, $http, $ionicPopup, PhotosManager) {
+  app.factory('AccountManager', function(ENV, $http, $ionicPopup, PhotosManager, $state, STATE) {
     var ACCOUNT_ENDPOINT = ENV.apiEndpoint + 'accounts/';
 
     function sendCredentials(route, credentials, context) {
@@ -17,7 +17,7 @@
           self.currentUser = res.data;
         });
       },
-      logout: function logout($state, STATE) {
+      logout: function logout() {
         return $http.post(ENV.apiEndpoint + 'logout').then(function() {
           $state.go(STATE.landingPage);
         });

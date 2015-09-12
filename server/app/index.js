@@ -63,8 +63,9 @@ app.use(function* authenticatePrivateRoutes(next) {
 app.use(mount('/login', require('./login')));
 app.use(mount('/photos', require('./controllers/photos')));
 app.use(mount('/accounts', require('./controllers/accounts')));
-app.use(route.post('/logout', function logout() {
+app.use(route.post('/logout', function* logout() {
   this.session = null;
+  this.body = null;
 }));
 /**
  * Exports.

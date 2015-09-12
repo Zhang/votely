@@ -3,7 +3,7 @@
 const Joi = require('joi');
 const uuid = require('uuid');
 const _ = require('lodash');
-
+const co = require('co');
 module.exports = function(collectionName, collection, schema) {
   return {
     create: function create(toAdd) {
