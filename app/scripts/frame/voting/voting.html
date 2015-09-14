@@ -1,12 +1,9 @@
-<ion-view view-title="Cards">
+<ion-view>
     <ion-pane>
-      <td-cards>
-        <!-- additional methods: on-destroy and on-partial-swipe -->
-        <td-card ng-repeat="card in cards" on-swipe-left="cardSwipedLeft(card)" on-swipe-right="cardSwipedRight(card)" class="card-{{$index}}">
-          <div class="image">
-            <img ng-src="{{card.location}}">
-          </div>
-        </td-card>
-      </td-cards>
+      <div class="photo-list voting">
+        <div ng-repeat="photo in photos" class="image-container">
+          <div class="image" back-img="{{photo.location}}"></div>
+        </div>
+      </div>
     </ion-pane>
 </ion-view>

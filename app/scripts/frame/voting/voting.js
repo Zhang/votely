@@ -1,14 +1,14 @@
 'use strict';
 
 (function() {
-  var app = angular.module('vote.cards', ['ionic.contrib.ui.tinderCards', 'vote.managers.photos', 'vote.managers.navbar']);
+  var app = angular.module('vote.cards', ['vote.managers.photos', 'vote.managers.navbar', 'lib.uiHelpers']);
 
   app.config(function($stateProvider, STATE) {
     $stateProvider
 
     .state(STATE.voting, {
       cache: false,
-      url: '/voting/:connectionId',
+      url: '/voting/:connection',
       views: {
         menuContent: {
           templateUrl: 'scripts/frame/voting/voting.html',
@@ -16,17 +16,16 @@
         }
       },
       resolve: {
-        Photos: function(AccountManager, $stateParams) {
-          AccountManager.getReceivedPhotos($stateParams.connectionId);
+        photosManager: function(AccountManager, $stateParams) {
+          return AccountManager.getReceivedPhotos($stateParams.connection);
         }
       }
     });
   });
 
-  app.controller('VotingController', function($scope, $stateParams, Photos, PhotosManager, NavbarManager) {
+  app.controller('VotingController', function($scope, $stateParams, photosManager, NavbarManager) {
     NavbarManager.useCamera();
-    $scope.cards = Photos;
-    var photosManager = new PhotosManager();
+    $scope.photos = photosManager.photos;
 
     $scope.cardSwipedLeft = function(card) {
       photosManager.upvote(card.id);

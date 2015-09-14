@@ -35,9 +35,8 @@
         }, this);
       },
       getConnections: function getConnections() {
-        var self = this;
         return $http.post(ACCOUNT_ENDPOINT + 'query/', {
-          ids: self.currentUser.connections
+          getConnections: true
         }).then(function(res) {
           return res.data;
         });
@@ -56,9 +55,15 @@
           });
         });
       },
-      getReceivedPhotos: function(id) {
+      getReceivedPhotos: function(from) {
         var photosManager = new PhotosManager();
-        return photosManager.query({ids: _.filter(_.map(this.currentUser.receivedPhotos, 'id'), id || true)});
+        var receivedPhotos = this.currentUser.receivedPhotos;
+        if (from) {
+          receivedPhotos = _.filter(receivedPhotos, {from : from});
+        }
+        return photosManager.query({ids: _.map(receivedPhotos, 'id')}).then(function() {
+          return photosManager;
+        });
       },
       getSelfPhotos: function() {
         var photosManager = new PhotosManager();

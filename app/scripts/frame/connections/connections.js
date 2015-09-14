@@ -29,5 +29,9 @@
     $scope.visitConnection = function(connection) {
       $state.go(STATE.voting, {connection: connection.id});
     };
+    // TODO: add how to add connection
+    // $scope.addConnection = function addConnection() {
+    //   $state.go(STATE.addConnectionn);
+    // };
   });
 })();

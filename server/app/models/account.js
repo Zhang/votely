@@ -25,13 +25,10 @@ function addSystemValues(account) {
 
   account.connections = account.connections.concat(DEFAULT_ID);
   account.receivedPhotos = account.receivedPhotos.concat([{
-    id: 'pig1',
+    id: 'gpig1',
     from: DEFAULT_ID
   }, {
-    id: 'pig2',
-    from: DEFAULT_ID
-  }, {
-    id: 'pig3',
+    id: 'gpig2',
     from: DEFAULT_ID
   }]);
 
