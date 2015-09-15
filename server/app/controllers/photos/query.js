@@ -9,7 +9,7 @@ const query = function* query() {
   if (body.ids) {
     params.id = {$in: body.ids};
   }
-
+  console.log(params);
   this.body = yield photoModel.query(params);
   this.status = 200;
 };

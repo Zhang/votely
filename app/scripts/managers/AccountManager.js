@@ -2,7 +2,7 @@
 
 (function() {
   var app = angular.module('vote.managers.account', ['config']);
-  app.factory('AccountManager', function(ENV, $http, $ionicPopup, PhotosManager) {
+  app.factory('AccountManager', function(ENV, $http, $ionicPopup, PhotosManager, $state, STATE) {
     var ACCOUNT_ENDPOINT = ENV.apiEndpoint + 'accounts/';
 
     function sendCredentials(route, credentials, context) {
@@ -17,9 +17,9 @@
           self.currentUser = res.data;
         });
       },
-      logout: function logout($state) {
+      logout: function logout() {
         return $http.post(ENV.apiEndpoint + 'logout').then(function() {
-          $state.go('landingPage');
+          $state.go(STATE.landingPage);
         });
       },
       login: function login(email, password) {
@@ -35,9 +35,8 @@
         }, this);
       },
       getConnections: function getConnections() {
-        var self = this;
         return $http.post(ACCOUNT_ENDPOINT + 'query/', {
-          ids: self.currentUser.connections
+          getConnections: true
         }).then(function(res) {
           return res.data;
         });
@@ -56,9 +55,15 @@
           });
         });
       },
-      getReceivedPhotos: function() {
+      getReceivedPhotos: function(from) {
         var photosManager = new PhotosManager();
-        return photosManager.query({ids: _.map(this.currentUser.receivedPhotos, 'id')});
+        var receivedPhotos = this.currentUser.receivedPhotos;
+        if (from) {
+          receivedPhotos = _.filter(receivedPhotos, {from : from});
+        }
+        return photosManager.query({ids: _.map(receivedPhotos, 'id')}).then(function() {
+          return photosManager;
+        });
       },
       getSelfPhotos: function() {
         var photosManager = new PhotosManager();

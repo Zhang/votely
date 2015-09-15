@@ -35,7 +35,7 @@ const vote = function* vote(id, voteResult) {
     increment = { downvote: photo.downvote += 1 };
   }
 
-  return collection.update(id, {$set: increment});
+  modelCRUD.updateById(id, {$set: increment});
 };
 
 module.exports = {

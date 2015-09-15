@@ -1,0 +1,45 @@
+.image-container {
+  height: 80%;
+}
+
+.image {
+  height: 100%;
+  position: relative;
+  .vote {
+    .set-vote-color (@color) {
+      border-color: @color;
+      color: @color;
+    }
+    @love-color: #fd4880;
+    @heartbreak-color: #fd4880;
+    @border-width: 2px;
+    @diameter: 60px;
+    @position-away-from-edge: 15%;
+    display: block;
+    position: absolute;
+    bottom: calc(~"50% - @{diameter}/2");
+    font-size: 25px;
+    color: white;
+    border: @border-width solid white;
+    line-height: calc(~"@{diameter} - @{border-width}");
+    height: calc(~"@{diameter} - @{border-width}");
+    width: @diameter;
+    border-radius: @diameter;
+    text-align: center;
+    &.upvote {
+      right: @position-away-from-edge;
+      &:hover {
+        .set-vote-color(@love-color);
+      }
+    }
+    &.downvote {
+      left: @position-away-from-edge;
+      &:hover {
+        .set-vote-color(@heartbreak-color);
+      }
+    }
+  }
+}
+.photo-list {
+  height: 100%;
+}

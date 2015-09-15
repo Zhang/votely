@@ -20,6 +20,21 @@ const AccountSchema = Joi.object().keys({
   })).required()
 });
 
+function addSystemValues(account) {
+  const DEFAULT_ID = 'I love guinea pigs';
+
+  account.connections = account.connections.concat(DEFAULT_ID);
+  account.receivedPhotos = account.receivedPhotos.concat([{
+    id: 'gpig1',
+    from: DEFAULT_ID
+  }, {
+    id: 'gpig2',
+    from: DEFAULT_ID
+  }]);
+
+  return account;
+}
+
 const modelCRUD = require('./concerns/modelCRUD')('account', collection, AccountSchema);
 
 function getByEmail(email) {
@@ -33,9 +48,11 @@ function* add(account) {
     receivedPhotos: []
   });
 
-  const existingAccount = yield getByEmail(account.email);
-  if (existingAccount) throw new errors.DuplicateError('account', account.email);
-  yield modelCRUD.create(account);
+  const withSysValues = addSystemValues(account);
+
+  const existingAccount = yield getByEmail(withSysValues.email);
+  if (existingAccount) throw new errors.DuplicateError('account', withSysValues.email);
+  yield modelCRUD.create(withSysValues);
 }
 
 function* connect(requester, connection) {

@@ -3,10 +3,10 @@
 (function() {
   var app = angular.module('vote.results', []);
 
-  app.config(function($stateProvider) {
+  app.config(function($stateProvider, STATE) {
     $stateProvider
 
-    .state('app.results', {
+    .state(STATE.results, {
       cache: false,
       url: '/results',
       views: {

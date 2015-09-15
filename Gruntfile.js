@@ -501,6 +501,7 @@ module.exports = function (grunt) {
     'ngconstant:development',
     'concurrent:server',
     'autoprefixer',
+    'less:build',
     'newer:copy:app',
     'newer:copy:tmp',
     'htmlbuild:dist'

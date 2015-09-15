@@ -2,25 +2,27 @@
 
 (function() {
   var app = angular.module('vote.main', []);
-  app.config(function($stateProvider) {
-    $stateProvider.state('app', {
+  app.config(function($stateProvider, STATE) {
+    $stateProvider.state(STATE.app, {
       url: '',
       cache: false,
       abstract: true,
-      templateUrl: 'scripts/frame/sidebar.html',
+      templateUrl: 'scripts/frame/main.html',
       controller: 'MainController',
+      resolve: {
+        isAuthenticated: function(AccountManager, $state, STATE) {
+          return AccountManager.getCurrentAccount().then(function resolve() {
+            return true;
+          }, function reject() {
+            $state.go(STATE.landingPage);
+          });
+        }
+      }
     });
   });
 
-  app.controller('MainController', function($scope, $state, AccountManager) {
-    (function() {
-      AccountManager.getCurrentAccount().then(function resolve() {
-        $state.go('app.cards');
-      }, function reject() {
-        $state.go('landingPage');
-      });
-    })();
-
-    $scope.logout = AccountManager.logout;
+  app.controller('MainController', function($scope, NavbarManager) {
+    $scope.leftSwipe = NavbarManager.swipeLeft;
+    $scope.rightSwipe = NavbarManager.swipeRight;
   });
 })();

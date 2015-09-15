@@ -6,8 +6,9 @@ const _ = require('lodash');
 
 module.exports = function(collectionName, collection, schema) {
   return {
-    create: function create(toAdd) {
-      toAdd.id = toAdd.id || uuid.v4();
+    create: function* create(toAdd) {
+      const existingId = toAdd.id;
+      toAdd.id = existingId || uuid.v4();
 
       var validity = Joi.validate(toAdd, schema);
 
@@ -15,6 +16,11 @@ module.exports = function(collectionName, collection, schema) {
         console.log('Invalid ' + collectionName + ' object: ', JSON.stringify(toAdd));
         console.log('Error: ', validity.error);
         throw validity.error;
+      }
+
+      if (existingId) {
+        const existingObj = yield collection.find({id: existingId});
+        if (existingObj) throw new Error('attempted to add duplicate object');
       }
 
       return collection.insert(toAdd);

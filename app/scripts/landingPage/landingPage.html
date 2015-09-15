@@ -1,18 +1,15 @@
 <div class="list landing">
-  <label class="item item-input item-stacked-label">
-    <span class="input-label">Email</span>
-    <input type="text" placeholder="Albert@gmail.com" ng-model="email">
-  </label>
-  <label class="item item-input item-stacked-label">
-    <span class="input-label">Password</span>
-    <input type="password" placeholder="Password" ng-model="password">
-  </label>
-  <div class="button-group bottom">
-    <button ng-click="signup(email, password)" class="button button-full button-positive">
-      Signup
-    </button>
-    <button ng-click="login(email, password)" class="button button-full button-positive">
+  <div class="transparent-inputs login-block">
+    <h2 class="title">Dip</h2>
+    <input class="block" type="text" placeholder="Robot@gmail.com" ng-model="email">
+    <input class="block" type="password" placeholder="Password" ng-model="password">
+    <button ng-click="login(email, password)" class="login block">
       Login
     </button>
+  </div>
+  <div class="button-group bottom">
+    <a ng-click="goToSignup()" class="">
+      Signup
+    </a>
   </div>
 </div>
