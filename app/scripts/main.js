@@ -21,7 +21,8 @@
     });
   });
 
-  app.controller('MainController', function($scope, AccountManager) {
-    $scope.logout = AccountManager.logout;
+  app.controller('MainController', function($scope, NavbarManager) {
+    $scope.leftSwipe = NavbarManager.swipeLeft;
+    $scope.rightSwipe = NavbarManager.swipeRight;
   });
 })();

@@ -2,7 +2,14 @@
     <ion-pane>
       <div class="photo-list voting">
         <div ng-repeat="photo in photos" class="image-container">
-          <div class="image" back-img="{{photo.location}}"></div>
+          <div class="image" back-img="{{photo.location}}">
+            <span class="downvote vote" ng-click="photos.splice($index, 1); downvote(photo)">
+              <i class="icon ion-heart-broken"></i>
+            </span>
+            <span class="upvote vote" ng-click="photos.splice($index, 1); upvote(photo)">
+              <i class="icon ion-heart"></i>
+            </span>
+          </div>
         </div>
       </div>
     </ion-pane>

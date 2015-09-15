@@ -3,6 +3,10 @@
   /* counteract the navbar height */
   height: calc(100vh - 43px);
 }
+.swipe-action-handler {
+  height: 100%;
+  width: 100%;
+}
 .pane {
   overflow-y: scroll;
   background-color: transparent;
@@ -40,6 +44,34 @@
 }
 .image {
   height: 100%;
+  position: relative;
+}
+.image .vote {
+  display: block;
+  position: absolute;
+  bottom: calc(50% - 60px/2);
+  font-size: 25px;
+  color: white;
+  border: 2px solid white;
+  line-height: calc(60px - 2px);
+  height: calc(60px - 2px);
+  width: 60px;
+  border-radius: 60px;
+  text-align: center;
+}
+.image .vote.upvote {
+  right: 15%;
+}
+.image .vote.upvote:hover {
+  border-color: #fd4880;
+  color: #fd4880;
+}
+.image .vote.downvote {
+  left: 15%;
+}
+.image .vote.downvote:hover {
+  border-color: #fd4880;
+  color: #fd4880;
 }
 .photo-list {
   height: 100%;
@@ -98,6 +130,10 @@ div.button-group {
 .navbar {
   background-color: #5eb343;
 }
-.navbar button.button.button-icon {
+.navbar button.button-icon {
+  min-width: 40px;
   color: white;
+}
+.navbar button.active-button {
+  color: #7d26cd;
 }

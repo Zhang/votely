@@ -20,7 +20,8 @@
         var url = attrs.backImg;
         el.css({
             'background-image': 'url(' + url +')',
-            'background-size' : 'cover'
+            'background-size' : 'cover',
+            'background-position': 'center'
         });
       }
     };

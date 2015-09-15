@@ -24,15 +24,15 @@
   });
 
   app.controller('VotingController', function($scope, $stateParams, photosManager, NavbarManager) {
-    NavbarManager.useCamera();
+    NavbarManager.useVoting();
     $scope.photos = photosManager.photos;
 
-    $scope.cardSwipedLeft = function(card) {
-      photosManager.upvote(card.id);
+    $scope.upvote = function(photo) {
+      photosManager.upvote(photo.id);
     };
 
-    $scope.cardSwipedRight = function(card) {
-      photosManager.downvote(card.id);
+    $scope.downvote = function(photo) {
+      photosManager.downvote(photo.id);
     };
   });
 })();
