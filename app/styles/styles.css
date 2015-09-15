@@ -49,14 +49,14 @@
 .image .vote {
   display: block;
   position: absolute;
-  bottom: calc(50% - 60px/2);
-  font-size: 25px;
+  bottom: calc(50% - 70px/2);
+  font-size: 30px;
   color: white;
   border: 2px solid white;
-  line-height: calc(60px - 2px);
-  height: calc(60px - 2px);
-  width: 60px;
-  border-radius: 60px;
+  line-height: calc(70px - 2px);
+  height: calc(70px - 2px);
+  width: 70px;
+  border-radius: 70px;
   text-align: center;
 }
 .image .vote.upvote {

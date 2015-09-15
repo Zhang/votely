@@ -24,6 +24,10 @@ passport.use(new LocalStrategy(function (email, password, done) {
   co(function* () {
     const account = yield accountModel.getByEmail(email);
     if (account && account.password === password) return done(null, account);
+
+    const accountByUsername = yield accountModel.getByScreenname(email);
+    if (accountByUsername && accountByUsername.password === password) return done(null, accountByUsername);
+
     done(null, false);
   });
 }));

@@ -13,8 +13,8 @@
   });
 
   app.controller('signupController', function($scope, $state, AccountManager, $ionicPopup, STATE) {
-    $scope.signup = function(email, password) {
-      AccountManager.signup(email, password).then(function resolve() {
+    $scope.signup = function(email, password, screenname) {
+      AccountManager.signup(email, password, screenname).then(function resolve() {
         $state.go(STATE.connections);
       }, function reject() {
         $ionicPopup.alert({

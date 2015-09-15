@@ -14,10 +14,12 @@ const create = function* create() {
   const body = this.request.body;
   const email = body.username;
   const password = body.password;
+  const screenname = body.screenname;
 
   yield accountModel.add({
     password: password,
-    email: email
+    email: email,
+    screenname: screenname
   });
 
   yield authentication.login.call(this);

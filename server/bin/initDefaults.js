@@ -17,6 +17,7 @@ const GPIG_2 = {
 const SYSTEM_ACCOUNT = {
   id: 'I love guinea pigs',
   email: 'scottzhang235@gmail.com',
+  screenname: 'System',
   password: 'gpig',
   selfPhotos: [GPIG_1.id, GPIG_2.id],
   connections: [],

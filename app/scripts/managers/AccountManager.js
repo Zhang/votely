@@ -28,10 +28,11 @@
           password: password
         }, this);
       },
-      signup: function signup(email, password) {
+      signup: function signup(email, password, screenname) {
         return sendCredentials(ACCOUNT_ENDPOINT, {
           username: email,
-          password: password
+          password: password,
+          screenname: screenname
         }, this);
       },
       getConnections: function getConnections() {

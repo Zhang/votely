@@ -11,6 +11,7 @@ const AccountSchema = Joi.object().keys({
   _id: Joi.string(),
   id: Joi.string().required(),
   email: Joi.string().required(),
+  screenname: Joi.string().required(),
   password: Joi.string().required(),
   connections: Joi.array().items(Joi.string().description('strings corresponding to the id of other users')).required(),
   selfPhotos: Joi.array().items(PhotoSchema).required(),
@@ -39,6 +40,10 @@ const modelCRUD = require('./concerns/modelCRUD')('account', collection, Account
 
 function getByEmail(email) {
   return collection.findOne({email: email});
+}
+
+function getByScreenname(screenname) {
+  return collection.findOne({screenname: screenname});
 }
 
 function* add(account) {
@@ -71,5 +76,6 @@ module.exports = {
   getByEmail: getByEmail,
   connect: connect,
   bulkUpdate: modelCRUD.bulkUpdate,
-  associatePhoto: associatePhoto
+  associatePhoto: associatePhoto,
+  getByScreenname: getByScreenname
 };
