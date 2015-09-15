@@ -70,6 +70,12 @@
       });
     }
 
+    var stateSettings = {
+      //set up state settings;
+    };
+    $rootScope.$on('$stateChangeSuccess', function(e, toState){
+      if (toState)
+    });
     return {
       goBack: function() {
         $state.go(this.backState);
